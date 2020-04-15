@@ -22,9 +22,8 @@ class CovidDataElement {
   });
 
   factory CovidDataElement.fromJson(Map<String, dynamic> json){
-    Utils util = Utils();
     return CovidDataElement(
-      data: util.convertStringToDate(json['data']),
+      data: Utils.convertStringToDate(json['data']),
       name: json['denominazione_regione'],
       totPositivi: json['totale_positivi'],
       deceduti: json['deceduti'],

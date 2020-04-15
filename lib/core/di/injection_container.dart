@@ -35,9 +35,11 @@ Future<void> init() async {
       ),
   );
 
-  //External
-  final sharedPreferences = await SharedPreferences.getInstance();
-  sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client);
   sl.registerLazySingleton(() => DataConnectionChecker());
+
+  //External
+  SharedPreferences.setMockInitialValues({});
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => sharedPreferences);
 }

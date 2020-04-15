@@ -11,6 +11,8 @@ import 'core/di/injection_container.dart' as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
   await di.init();
   initApp();
   runApp(MyApp());
@@ -29,7 +31,8 @@ class MyApp extends StatelessWidget {
         RepositoryProvider<CovidDataRepository>(
           builder: (context) => CovidDataRepositoryImpl(
             covidDataDao: di.sl(), 
-            networkInfo: di.sl(),
+            networkInfo: di.sl(), 
+            sharedPreferences: di.sl(),
           ),
         ),
       ],
