@@ -1,0 +1,20 @@
+import 'package:covid_app/data/local/moor_database.dart';
+import 'package:covid_app/data/local/tables/covid_data_table.dart';
+import 'package:moor_flutter/moor_flutter.dart';
+
+part 'covid_data_dao.g.dart';
+
+@UseDao(tables: [CovidDatas])
+class CovidDataDao extends DatabaseAccessor<AppDatabase> with _$CovidDataDaoMixin {
+  final AppDatabase db;
+
+  CovidDataDao(this.db) : super(db);
+
+  Future<List<CovidData>> getAllCovidData() => select(covidDatas).get();
+  Stream<List<CovidData>> watchAllCovidData() => select(covidDatas).watch();
+  Future insertEvent(CovidData data) => into(covidDatas).insert(data, orReplace: true);
+  Future updateCovidData(CovidData data) => update(covidDatas).replace(data);
+  Future deleteCovidData(CovidData data) => delete(covidDatas).delete(data);
+
+  Future deleteAllCovidData() => delete(covidDatas).go();
+}
