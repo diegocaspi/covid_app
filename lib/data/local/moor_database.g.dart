@@ -8,44 +8,40 @@ part of 'moor_database.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
 class CovidData extends DataClass implements Insertable<CovidData> {
-  final int id;
-  final String denominazione_regione;
+  final String name;
   final DateTime data;
-  final int totale_positivi;
+  final int totPositivi;
   final int deceduti;
-  final int dimessi_guariti;
-  final int terapia_intensiva;
-  final int nuovi_positivi;
+  final int dimessiGuariti;
+  final int terapiaIntensiva;
+  final int nuoviPositivi;
   CovidData(
-      {@required this.id,
-      @required this.denominazione_regione,
+      {@required this.name,
       @required this.data,
-      @required this.totale_positivi,
+      @required this.totPositivi,
       @required this.deceduti,
-      @required this.dimessi_guariti,
-      @required this.terapia_intensiva,
-      @required this.nuovi_positivi});
+      @required this.dimessiGuariti,
+      @required this.terapiaIntensiva,
+      @required this.nuoviPositivi});
   factory CovidData.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
     final dateTimeType = db.typeSystem.forDartType<DateTime>();
+    final intType = db.typeSystem.forDartType<int>();
     return CovidData(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
-      denominazione_regione: stringType.mapFromDatabaseResponse(
-          data['${effectivePrefix}denominazione_regione']),
+      name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
       data:
           dateTimeType.mapFromDatabaseResponse(data['${effectivePrefix}data']),
-      totale_positivi: intType
-          .mapFromDatabaseResponse(data['${effectivePrefix}totale_positivi']),
+      totPositivi: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}tot_positivi']),
       deceduti:
           intType.mapFromDatabaseResponse(data['${effectivePrefix}deceduti']),
-      dimessi_guariti: intType
+      dimessiGuariti: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}dimessi_guariti']),
-      terapia_intensiva: intType
+      terapiaIntensiva: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}terapia_intensiva']),
-      nuovi_positivi: intType
+      nuoviPositivi: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}nuovi_positivi']),
     );
   }
@@ -53,176 +49,157 @@ class CovidData extends DataClass implements Insertable<CovidData> {
       {ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return CovidData(
-      id: serializer.fromJson<int>(json['id']),
-      denominazione_regione:
-          serializer.fromJson<String>(json['denominazione_regione']),
+      name: serializer.fromJson<String>(json['name']),
       data: serializer.fromJson<DateTime>(json['data']),
-      totale_positivi: serializer.fromJson<int>(json['totale_positivi']),
+      totPositivi: serializer.fromJson<int>(json['totPositivi']),
       deceduti: serializer.fromJson<int>(json['deceduti']),
-      dimessi_guariti: serializer.fromJson<int>(json['dimessi_guariti']),
-      terapia_intensiva: serializer.fromJson<int>(json['terapia_intensiva']),
-      nuovi_positivi: serializer.fromJson<int>(json['nuovi_positivi']),
+      dimessiGuariti: serializer.fromJson<int>(json['dimessiGuariti']),
+      terapiaIntensiva: serializer.fromJson<int>(json['terapiaIntensiva']),
+      nuoviPositivi: serializer.fromJson<int>(json['nuoviPositivi']),
     );
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'denominazione_regione': serializer.toJson<String>(denominazione_regione),
+      'name': serializer.toJson<String>(name),
       'data': serializer.toJson<DateTime>(data),
-      'totale_positivi': serializer.toJson<int>(totale_positivi),
+      'totPositivi': serializer.toJson<int>(totPositivi),
       'deceduti': serializer.toJson<int>(deceduti),
-      'dimessi_guariti': serializer.toJson<int>(dimessi_guariti),
-      'terapia_intensiva': serializer.toJson<int>(terapia_intensiva),
-      'nuovi_positivi': serializer.toJson<int>(nuovi_positivi),
+      'dimessiGuariti': serializer.toJson<int>(dimessiGuariti),
+      'terapiaIntensiva': serializer.toJson<int>(terapiaIntensiva),
+      'nuoviPositivi': serializer.toJson<int>(nuoviPositivi),
     };
   }
 
   @override
   CovidDatasCompanion createCompanion(bool nullToAbsent) {
     return CovidDatasCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      denominazione_regione: denominazione_regione == null && nullToAbsent
-          ? const Value.absent()
-          : Value(denominazione_regione),
+      name: name == null && nullToAbsent ? const Value.absent() : Value(name),
       data: data == null && nullToAbsent ? const Value.absent() : Value(data),
-      totale_positivi: totale_positivi == null && nullToAbsent
+      totPositivi: totPositivi == null && nullToAbsent
           ? const Value.absent()
-          : Value(totale_positivi),
+          : Value(totPositivi),
       deceduti: deceduti == null && nullToAbsent
           ? const Value.absent()
           : Value(deceduti),
-      dimessi_guariti: dimessi_guariti == null && nullToAbsent
+      dimessiGuariti: dimessiGuariti == null && nullToAbsent
           ? const Value.absent()
-          : Value(dimessi_guariti),
-      terapia_intensiva: terapia_intensiva == null && nullToAbsent
+          : Value(dimessiGuariti),
+      terapiaIntensiva: terapiaIntensiva == null && nullToAbsent
           ? const Value.absent()
-          : Value(terapia_intensiva),
-      nuovi_positivi: nuovi_positivi == null && nullToAbsent
+          : Value(terapiaIntensiva),
+      nuoviPositivi: nuoviPositivi == null && nullToAbsent
           ? const Value.absent()
-          : Value(nuovi_positivi),
+          : Value(nuoviPositivi),
     );
   }
 
   CovidData copyWith(
-          {int id,
-          String denominazione_regione,
+          {String name,
           DateTime data,
-          int totale_positivi,
+          int totPositivi,
           int deceduti,
-          int dimessi_guariti,
-          int terapia_intensiva,
-          int nuovi_positivi}) =>
+          int dimessiGuariti,
+          int terapiaIntensiva,
+          int nuoviPositivi}) =>
       CovidData(
-        id: id ?? this.id,
-        denominazione_regione:
-            denominazione_regione ?? this.denominazione_regione,
+        name: name ?? this.name,
         data: data ?? this.data,
-        totale_positivi: totale_positivi ?? this.totale_positivi,
+        totPositivi: totPositivi ?? this.totPositivi,
         deceduti: deceduti ?? this.deceduti,
-        dimessi_guariti: dimessi_guariti ?? this.dimessi_guariti,
-        terapia_intensiva: terapia_intensiva ?? this.terapia_intensiva,
-        nuovi_positivi: nuovi_positivi ?? this.nuovi_positivi,
+        dimessiGuariti: dimessiGuariti ?? this.dimessiGuariti,
+        terapiaIntensiva: terapiaIntensiva ?? this.terapiaIntensiva,
+        nuoviPositivi: nuoviPositivi ?? this.nuoviPositivi,
       );
   @override
   String toString() {
     return (StringBuffer('CovidData(')
-          ..write('id: $id, ')
-          ..write('denominazione_regione: $denominazione_regione, ')
+          ..write('name: $name, ')
           ..write('data: $data, ')
-          ..write('totale_positivi: $totale_positivi, ')
+          ..write('totPositivi: $totPositivi, ')
           ..write('deceduti: $deceduti, ')
-          ..write('dimessi_guariti: $dimessi_guariti, ')
-          ..write('terapia_intensiva: $terapia_intensiva, ')
-          ..write('nuovi_positivi: $nuovi_positivi')
+          ..write('dimessiGuariti: $dimessiGuariti, ')
+          ..write('terapiaIntensiva: $terapiaIntensiva, ')
+          ..write('nuoviPositivi: $nuoviPositivi')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => $mrjf($mrjc(
-      id.hashCode,
+      name.hashCode,
       $mrjc(
-          denominazione_regione.hashCode,
+          data.hashCode,
           $mrjc(
-              data.hashCode,
+              totPositivi.hashCode,
               $mrjc(
-                  totale_positivi.hashCode,
+                  deceduti.hashCode,
                   $mrjc(
-                      deceduti.hashCode,
-                      $mrjc(
-                          dimessi_guariti.hashCode,
-                          $mrjc(terapia_intensiva.hashCode,
-                              nuovi_positivi.hashCode))))))));
+                      dimessiGuariti.hashCode,
+                      $mrjc(terapiaIntensiva.hashCode,
+                          nuoviPositivi.hashCode)))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other is CovidData &&
-          other.id == this.id &&
-          other.denominazione_regione == this.denominazione_regione &&
+          other.name == this.name &&
           other.data == this.data &&
-          other.totale_positivi == this.totale_positivi &&
+          other.totPositivi == this.totPositivi &&
           other.deceduti == this.deceduti &&
-          other.dimessi_guariti == this.dimessi_guariti &&
-          other.terapia_intensiva == this.terapia_intensiva &&
-          other.nuovi_positivi == this.nuovi_positivi);
+          other.dimessiGuariti == this.dimessiGuariti &&
+          other.terapiaIntensiva == this.terapiaIntensiva &&
+          other.nuoviPositivi == this.nuoviPositivi);
 }
 
 class CovidDatasCompanion extends UpdateCompanion<CovidData> {
-  final Value<int> id;
-  final Value<String> denominazione_regione;
+  final Value<String> name;
   final Value<DateTime> data;
-  final Value<int> totale_positivi;
+  final Value<int> totPositivi;
   final Value<int> deceduti;
-  final Value<int> dimessi_guariti;
-  final Value<int> terapia_intensiva;
-  final Value<int> nuovi_positivi;
+  final Value<int> dimessiGuariti;
+  final Value<int> terapiaIntensiva;
+  final Value<int> nuoviPositivi;
   const CovidDatasCompanion({
-    this.id = const Value.absent(),
-    this.denominazione_regione = const Value.absent(),
+    this.name = const Value.absent(),
     this.data = const Value.absent(),
-    this.totale_positivi = const Value.absent(),
+    this.totPositivi = const Value.absent(),
     this.deceduti = const Value.absent(),
-    this.dimessi_guariti = const Value.absent(),
-    this.terapia_intensiva = const Value.absent(),
-    this.nuovi_positivi = const Value.absent(),
+    this.dimessiGuariti = const Value.absent(),
+    this.terapiaIntensiva = const Value.absent(),
+    this.nuoviPositivi = const Value.absent(),
   });
   CovidDatasCompanion.insert({
-    this.id = const Value.absent(),
-    @required String denominazione_regione,
+    @required String name,
     @required DateTime data,
-    @required int totale_positivi,
+    @required int totPositivi,
     @required int deceduti,
-    @required int dimessi_guariti,
-    @required int terapia_intensiva,
-    @required int nuovi_positivi,
-  })  : denominazione_regione = Value(denominazione_regione),
+    @required int dimessiGuariti,
+    @required int terapiaIntensiva,
+    @required int nuoviPositivi,
+  })  : name = Value(name),
         data = Value(data),
-        totale_positivi = Value(totale_positivi),
+        totPositivi = Value(totPositivi),
         deceduti = Value(deceduti),
-        dimessi_guariti = Value(dimessi_guariti),
-        terapia_intensiva = Value(terapia_intensiva),
-        nuovi_positivi = Value(nuovi_positivi);
+        dimessiGuariti = Value(dimessiGuariti),
+        terapiaIntensiva = Value(terapiaIntensiva),
+        nuoviPositivi = Value(nuoviPositivi);
   CovidDatasCompanion copyWith(
-      {Value<int> id,
-      Value<String> denominazione_regione,
+      {Value<String> name,
       Value<DateTime> data,
-      Value<int> totale_positivi,
+      Value<int> totPositivi,
       Value<int> deceduti,
-      Value<int> dimessi_guariti,
-      Value<int> terapia_intensiva,
-      Value<int> nuovi_positivi}) {
+      Value<int> dimessiGuariti,
+      Value<int> terapiaIntensiva,
+      Value<int> nuoviPositivi}) {
     return CovidDatasCompanion(
-      id: id ?? this.id,
-      denominazione_regione:
-          denominazione_regione ?? this.denominazione_regione,
+      name: name ?? this.name,
       data: data ?? this.data,
-      totale_positivi: totale_positivi ?? this.totale_positivi,
+      totPositivi: totPositivi ?? this.totPositivi,
       deceduti: deceduti ?? this.deceduti,
-      dimessi_guariti: dimessi_guariti ?? this.dimessi_guariti,
-      terapia_intensiva: terapia_intensiva ?? this.terapia_intensiva,
-      nuovi_positivi: nuovi_positivi ?? this.nuovi_positivi,
+      dimessiGuariti: dimessiGuariti ?? this.dimessiGuariti,
+      terapiaIntensiva: terapiaIntensiva ?? this.terapiaIntensiva,
+      nuoviPositivi: nuoviPositivi ?? this.nuoviPositivi,
     );
   }
 }
@@ -232,24 +209,13 @@ class $CovidDatasTable extends CovidDatas
   final GeneratedDatabase _db;
   final String _alias;
   $CovidDatasTable(this._db, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  GeneratedTextColumn _name;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
-  final VerificationMeta _denominazione_regioneMeta =
-      const VerificationMeta('denominazione_regione');
-  GeneratedTextColumn _denominazione_regione;
-  @override
-  GeneratedTextColumn get denominazione_regione =>
-      _denominazione_regione ??= _constructDenominazioneRegione();
-  GeneratedTextColumn _constructDenominazioneRegione() {
+  GeneratedTextColumn get name => _name ??= _constructName();
+  GeneratedTextColumn _constructName() {
     return GeneratedTextColumn(
-      'denominazione_regione',
+      'name',
       $tableName,
       false,
     );
@@ -267,15 +233,15 @@ class $CovidDatasTable extends CovidDatas
     );
   }
 
-  final VerificationMeta _totale_positiviMeta =
-      const VerificationMeta('totale_positivi');
-  GeneratedIntColumn _totale_positivi;
+  final VerificationMeta _totPositiviMeta =
+      const VerificationMeta('totPositivi');
+  GeneratedIntColumn _totPositivi;
   @override
-  GeneratedIntColumn get totale_positivi =>
-      _totale_positivi ??= _constructTotalePositivi();
-  GeneratedIntColumn _constructTotalePositivi() {
+  GeneratedIntColumn get totPositivi =>
+      _totPositivi ??= _constructTotPositivi();
+  GeneratedIntColumn _constructTotPositivi() {
     return GeneratedIntColumn(
-      'totale_positivi',
+      'tot_positivi',
       $tableName,
       false,
     );
@@ -293,12 +259,12 @@ class $CovidDatasTable extends CovidDatas
     );
   }
 
-  final VerificationMeta _dimessi_guaritiMeta =
-      const VerificationMeta('dimessi_guariti');
-  GeneratedIntColumn _dimessi_guariti;
+  final VerificationMeta _dimessiGuaritiMeta =
+      const VerificationMeta('dimessiGuariti');
+  GeneratedIntColumn _dimessiGuariti;
   @override
-  GeneratedIntColumn get dimessi_guariti =>
-      _dimessi_guariti ??= _constructDimessiGuariti();
+  GeneratedIntColumn get dimessiGuariti =>
+      _dimessiGuariti ??= _constructDimessiGuariti();
   GeneratedIntColumn _constructDimessiGuariti() {
     return GeneratedIntColumn(
       'dimessi_guariti',
@@ -307,12 +273,12 @@ class $CovidDatasTable extends CovidDatas
     );
   }
 
-  final VerificationMeta _terapia_intensivaMeta =
-      const VerificationMeta('terapia_intensiva');
-  GeneratedIntColumn _terapia_intensiva;
+  final VerificationMeta _terapiaIntensivaMeta =
+      const VerificationMeta('terapiaIntensiva');
+  GeneratedIntColumn _terapiaIntensiva;
   @override
-  GeneratedIntColumn get terapia_intensiva =>
-      _terapia_intensiva ??= _constructTerapiaIntensiva();
+  GeneratedIntColumn get terapiaIntensiva =>
+      _terapiaIntensiva ??= _constructTerapiaIntensiva();
   GeneratedIntColumn _constructTerapiaIntensiva() {
     return GeneratedIntColumn(
       'terapia_intensiva',
@@ -321,12 +287,12 @@ class $CovidDatasTable extends CovidDatas
     );
   }
 
-  final VerificationMeta _nuovi_positiviMeta =
-      const VerificationMeta('nuovi_positivi');
-  GeneratedIntColumn _nuovi_positivi;
+  final VerificationMeta _nuoviPositiviMeta =
+      const VerificationMeta('nuoviPositivi');
+  GeneratedIntColumn _nuoviPositivi;
   @override
-  GeneratedIntColumn get nuovi_positivi =>
-      _nuovi_positivi ??= _constructNuoviPositivi();
+  GeneratedIntColumn get nuoviPositivi =>
+      _nuoviPositivi ??= _constructNuoviPositivi();
   GeneratedIntColumn _constructNuoviPositivi() {
     return GeneratedIntColumn(
       'nuovi_positivi',
@@ -337,14 +303,13 @@ class $CovidDatasTable extends CovidDatas
 
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        denominazione_regione,
+        name,
         data,
-        totale_positivi,
+        totPositivi,
         deceduti,
-        dimessi_guariti,
-        terapia_intensiva,
-        nuovi_positivi
+        dimessiGuariti,
+        terapiaIntensiva,
+        nuoviPositivi
       ];
   @override
   $CovidDatasTable get asDslTable => this;
@@ -356,16 +321,11 @@ class $CovidDatasTable extends CovidDatas
   VerificationContext validateIntegrity(CovidDatasCompanion d,
       {bool isInserting = false}) {
     final context = VerificationContext();
-    if (d.id.present) {
-      context.handle(_idMeta, id.isAcceptableValue(d.id.value, _idMeta));
-    }
-    if (d.denominazione_regione.present) {
+    if (d.name.present) {
       context.handle(
-          _denominazione_regioneMeta,
-          denominazione_regione.isAcceptableValue(
-              d.denominazione_regione.value, _denominazione_regioneMeta));
+          _nameMeta, name.isAcceptableValue(d.name.value, _nameMeta));
     } else if (isInserting) {
-      context.missing(_denominazione_regioneMeta);
+      context.missing(_nameMeta);
     }
     if (d.data.present) {
       context.handle(
@@ -373,13 +333,11 @@ class $CovidDatasTable extends CovidDatas
     } else if (isInserting) {
       context.missing(_dataMeta);
     }
-    if (d.totale_positivi.present) {
-      context.handle(
-          _totale_positiviMeta,
-          totale_positivi.isAcceptableValue(
-              d.totale_positivi.value, _totale_positiviMeta));
+    if (d.totPositivi.present) {
+      context.handle(_totPositiviMeta,
+          totPositivi.isAcceptableValue(d.totPositivi.value, _totPositiviMeta));
     } else if (isInserting) {
-      context.missing(_totale_positiviMeta);
+      context.missing(_totPositiviMeta);
     }
     if (d.deceduti.present) {
       context.handle(_decedutiMeta,
@@ -387,35 +345,35 @@ class $CovidDatasTable extends CovidDatas
     } else if (isInserting) {
       context.missing(_decedutiMeta);
     }
-    if (d.dimessi_guariti.present) {
+    if (d.dimessiGuariti.present) {
       context.handle(
-          _dimessi_guaritiMeta,
-          dimessi_guariti.isAcceptableValue(
-              d.dimessi_guariti.value, _dimessi_guaritiMeta));
+          _dimessiGuaritiMeta,
+          dimessiGuariti.isAcceptableValue(
+              d.dimessiGuariti.value, _dimessiGuaritiMeta));
     } else if (isInserting) {
-      context.missing(_dimessi_guaritiMeta);
+      context.missing(_dimessiGuaritiMeta);
     }
-    if (d.terapia_intensiva.present) {
+    if (d.terapiaIntensiva.present) {
       context.handle(
-          _terapia_intensivaMeta,
-          terapia_intensiva.isAcceptableValue(
-              d.terapia_intensiva.value, _terapia_intensivaMeta));
+          _terapiaIntensivaMeta,
+          terapiaIntensiva.isAcceptableValue(
+              d.terapiaIntensiva.value, _terapiaIntensivaMeta));
     } else if (isInserting) {
-      context.missing(_terapia_intensivaMeta);
+      context.missing(_terapiaIntensivaMeta);
     }
-    if (d.nuovi_positivi.present) {
+    if (d.nuoviPositivi.present) {
       context.handle(
-          _nuovi_positiviMeta,
-          nuovi_positivi.isAcceptableValue(
-              d.nuovi_positivi.value, _nuovi_positiviMeta));
+          _nuoviPositiviMeta,
+          nuoviPositivi.isAcceptableValue(
+              d.nuoviPositivi.value, _nuoviPositiviMeta));
     } else if (isInserting) {
-      context.missing(_nuovi_positiviMeta);
+      context.missing(_nuoviPositiviMeta);
     }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => {name};
   @override
   CovidData map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
@@ -425,31 +383,27 @@ class $CovidDatasTable extends CovidDatas
   @override
   Map<String, Variable> entityToSql(CovidDatasCompanion d) {
     final map = <String, Variable>{};
-    if (d.id.present) {
-      map['id'] = Variable<int, IntType>(d.id.value);
-    }
-    if (d.denominazione_regione.present) {
-      map['denominazione_regione'] =
-          Variable<String, StringType>(d.denominazione_regione.value);
+    if (d.name.present) {
+      map['name'] = Variable<String, StringType>(d.name.value);
     }
     if (d.data.present) {
       map['data'] = Variable<DateTime, DateTimeType>(d.data.value);
     }
-    if (d.totale_positivi.present) {
-      map['totale_positivi'] = Variable<int, IntType>(d.totale_positivi.value);
+    if (d.totPositivi.present) {
+      map['tot_positivi'] = Variable<int, IntType>(d.totPositivi.value);
     }
     if (d.deceduti.present) {
       map['deceduti'] = Variable<int, IntType>(d.deceduti.value);
     }
-    if (d.dimessi_guariti.present) {
-      map['dimessi_guariti'] = Variable<int, IntType>(d.dimessi_guariti.value);
+    if (d.dimessiGuariti.present) {
+      map['dimessi_guariti'] = Variable<int, IntType>(d.dimessiGuariti.value);
     }
-    if (d.terapia_intensiva.present) {
+    if (d.terapiaIntensiva.present) {
       map['terapia_intensiva'] =
-          Variable<int, IntType>(d.terapia_intensiva.value);
+          Variable<int, IntType>(d.terapiaIntensiva.value);
     }
-    if (d.nuovi_positivi.present) {
-      map['nuovi_positivi'] = Variable<int, IntType>(d.nuovi_positivi.value);
+    if (d.nuoviPositivi.present) {
+      map['nuovi_positivi'] = Variable<int, IntType>(d.nuoviPositivi.value);
     }
     return map;
   }

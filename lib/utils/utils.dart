@@ -10,4 +10,8 @@ class Utils{
     });
     return ret;
   }
+
+  DateTime convertStringToDate(String date){
+    return DateTime.parse(date);
+  }
 }
