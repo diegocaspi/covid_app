@@ -14,9 +14,10 @@ dependencies:
 
   get_it: ^2.0.1
 
-  flutter_bloc: ^0.21.0
+  flutter_bloc:
+  bloc: 
 
-  equatable: ^0.4.0
+  equatable: ^1.1.1
 
   connectivity: ^0.4.3+7
 

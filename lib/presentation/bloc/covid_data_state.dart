@@ -1,8 +1,9 @@
 part of 'covid_data_bloc.dart';
 
 @immutable
-abstract class CovidDataState extends Equatable {
-  CovidDataState([List props = const <dynamic>[]]) : super(props);
+abstract class CovidDataState extends Equatable{
+  @override
+  List<Object> get props => null;
 }
 
 class CovidDataNotLoaded extends CovidDataState {}

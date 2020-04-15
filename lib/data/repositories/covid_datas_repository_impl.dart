@@ -6,14 +6,27 @@ import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/domain/entities/covid_data.dart';
 import 'package:covid_app/domain/entities/mapper/covid_data_mapper.dart';
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
-import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CovidDataRepositoryImpl implements CovidDataRepository{
 
   CovidDataDao covidDataDao;
-  NetworkInfo networkInfo = NetworkInfoImpl(new DataConnectionChecker());
+  NetworkInfo networkInfo;
+  SharedPreferences sharedPreferences;
 
+  CovidDataRepositoryImpl({
+    @required this.covidDataDao,
+    @required this.networkInfo,
+    @required this.sharedPreferences,
+  });
+
+  @override
+  bool getBool(String key){
+    return sharedPreferences.getBool(key);
+  }
+  
   @override
   Stream<List<CovidData>> watchAllCovidData(){
     return covidDataDao.watchAllCovidData();

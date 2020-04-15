@@ -1,8 +1,7 @@
 import 'package:covid_app/utils/utils.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
-class CovidDataElement extends Equatable {
+class CovidDataElement {
 
   final DateTime data;
   final String name;
@@ -20,7 +19,7 @@ class CovidDataElement extends Equatable {
   @required this.dimessiGuariti,
   @required this.terapiaIntensiva,
   @required this.nuoviPositivi,
-  }) : super([data, name, totPositivi, deceduti, dimessiGuariti, terapiaIntensiva, nuoviPositivi]);
+  });
 
   factory CovidDataElement.fromJson(Map<String, dynamic> json){
     Utils util = Utils();
