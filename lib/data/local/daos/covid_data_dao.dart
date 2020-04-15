@@ -16,6 +16,7 @@ class CovidDataDao extends DatabaseAccessor<AppDatabase> with _$CovidDataDaoMixi
   }
   Stream<List<CovidData>> watchAllCovidData() => select(covidDatas).watch();
   Future insertEvent(CovidData data) => into(covidDatas).insert(data, orReplace: true);
+  
   Future updateCovidData(CovidData data) => update(covidDatas).replace(data);
   Future deleteCovidData(CovidData data) => delete(covidDatas).delete(data);
 

@@ -23,7 +23,6 @@ class CovidDataElement extends Equatable {
   }) : super([data, name, totPositivi, deceduti, dimessiGuariti, terapiaIntensiva, nuoviPositivi]);
 
   factory CovidDataElement.fromJson(Map<String, dynamic> json){
-
     Utils util = Utils();
     return CovidDataElement(
       data: util.convertStringToDate(json['data']),
@@ -34,5 +33,12 @@ class CovidDataElement extends Equatable {
       terapiaIntensiva: json['terapia_intensiva'],
       nuoviPositivi: json['nuovi_positivi'],
       );
+  }
+
+  @override
+  String toString() {
+    return "region: " + name + "\ndate: " + data.toString() + "\ntot positivi: " + totPositivi.toString() + 
+    "\ndeceduti: " + deceduti.toString() + "\ndimessi: " + dimessiGuariti.toString() + "\nterapia intensiva: " + 
+    terapiaIntensiva.toString() + "\nnuovi positivi: " + nuoviPositivi.toString();
   }
 }

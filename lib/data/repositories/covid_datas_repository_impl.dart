@@ -6,12 +6,13 @@ import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/domain/entities/covid_data.dart';
 import 'package:covid_app/domain/entities/mapper/covid_data_mapper.dart';
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:http/http.dart' as http;
 
 class CovidDataRepositoryImpl implements CovidDataRepository{
 
   CovidDataDao covidDataDao;
-  NetworkInfo networkInfo;
+  NetworkInfo networkInfo = NetworkInfoImpl(new DataConnectionChecker());
 
   @override
   Stream<List<CovidData>> watchAllCovidData(){
@@ -40,7 +41,6 @@ class CovidDataRepositoryImpl implements CovidDataRepository{
 
       List<CovidData> insertElements = [];
       list.forEach((f) => insertElements.add(CovidDataMapper.convertToDb(f)));
-
       covidDataDao.updateAllCovidData(insertElements);
     }
   }
