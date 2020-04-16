@@ -22,7 +22,7 @@ class CovidDataDao extends DatabaseAccessor<AppDatabase> with _$CovidDataDaoMixi
 
   Future updateAllCovidData(List<CovidData> data) async {
     await batch((b) {
-      b.insertAll(covidDatas, data);
+      b.replaceAll(covidDatas, data);
     });
   }
   Future deleteAllCovidData() => delete(covidDatas).go();

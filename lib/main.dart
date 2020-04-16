@@ -3,7 +3,6 @@ import 'package:covid_app/core/simple_bloc_delegate.dart';
 import 'package:covid_app/data/repositories/covid_datas_repository_impl.dart';
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
 import 'package:covid_app/presentation/bloc/bloc.dart';
-import 'package:covid_app/presentation/pages/home/home_page.dart';
 import 'package:covid_app/presentation/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<CovidDataRepository>(
-          builder: (context) => CovidDataRepositoryImpl(
+          create: (context) => CovidDataRepositoryImpl(
             covidDataDao: di.sl(), 
             networkInfo: di.sl(), 
             sharedPreferences: di.sl(),
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<CovidDataBloc>(
-            builder: (context) => CovidDataBloc(covidDataRepository: di.sl()),
+            create: (context) => CovidDataBloc(covidDataRepository: di.sl()),
           )
         ],
         child: MaterialApp(

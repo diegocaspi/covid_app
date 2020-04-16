@@ -19,7 +19,7 @@ void main() {
 
       List<CovidDataElement> covidDataElement = await imp.fetchData();
       Map<DateTime, int> italyTotPositivi = 
-        Utils.getItalyTotPositivi(Utils.getDailyMap(
+        Utils.getItalyDeceduti(Utils.getDailyMap(
           Utils.convertDataToDb(covidDataElement)) );
       
       italyTotPositivi.forEach((k, v) => print('${k}: ${v}'));

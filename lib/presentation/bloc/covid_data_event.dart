@@ -15,3 +15,5 @@ class GetCovidDataFromRegion extends CovidDataEvent {
     @required this.region,
   });
 }
+
+class UpdateCovidData extends CovidDataEvent {}

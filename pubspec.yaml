@@ -15,6 +15,7 @@ dependencies:
   get_it: ^2.0.1
 
   flutter_bloc:
+  
   bloc: 
 
   equatable: ^1.1.1
@@ -27,17 +28,19 @@ dependencies:
   # Database
   moor_flutter: ^2.1.0
 
-  provider: ^3.0.0+1
+  provider: ^4.0.4
+  intl:
 
   data_connection_checker: ^0.3.4
   fl_chart: ^0.9.0
+
+  liquid_swipe: ^1.4.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   moor_generator: ^2.1.0
   mockito: ^4.1.0
-  shared_preferences: 0.5.3+4
   build_runner:
     
 flutter:

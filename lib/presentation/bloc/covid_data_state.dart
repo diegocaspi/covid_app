@@ -19,3 +19,11 @@ class CovidDataLoaded extends CovidDataState{
 }
 
 class CovidDataLoadError extends CovidDataState{}
+
+class CovidDataNotUpdated extends CovidDataState {}
+
+class CovidDataUpdating extends CovidDataState {}
+
+class CovidDataUpdated extends CovidDataState {}
+
+class CovidDataUpdateError extends CovidDataState {}

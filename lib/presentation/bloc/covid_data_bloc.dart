@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
+import 'package:covid_app/presentation/bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -17,7 +18,7 @@ class CovidDataBloc extends Bloc<CovidDataEvent, CovidDataState> {
   });
 
   @override
-  CovidDataState get initialState => CovidDataNotLoaded();
+  CovidDataState get initialState => CovidDataNotUpdated();
 
   @override
   Stream<CovidDataState> mapEventToState(
@@ -25,8 +26,12 @@ class CovidDataBloc extends Bloc<CovidDataEvent, CovidDataState> {
   ) async* {
     if(event is GetAllCovidData){
       yield* _mapGetAllCovidDataToState();
+
+    } else if(event is GetCovidDataFromRegion){
+      yield* _mapGetCovidDataFromRegionToState(event.region);
+
     } else {
-      yield* _mapGetCovidDataFromRegionToState((event as GetCovidDataFromRegion).region);
+      yield* _mapUpdateAllCovidData();
     }
   }
 
@@ -49,6 +54,17 @@ class CovidDataBloc extends Bloc<CovidDataEvent, CovidDataState> {
       yield CovidDataLoaded(datas: data);
     } catch (_) {
       yield CovidDataLoadError();
+    }
+  }
+
+  Stream<CovidDataState> _mapUpdateAllCovidData() async* {
+    yield CovidDataNotUpdated();
+
+    try{
+      covidDataRepository.updateCovidData();
+      yield CovidDataUpdated();
+    } catch (_) {
+      yield CovidDataUpdateError();
     }
   }
 }
