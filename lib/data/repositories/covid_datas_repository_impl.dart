@@ -26,6 +26,11 @@ class CovidDataRepositoryImpl implements CovidDataRepository{
   bool getBool(String key){
     return sharedPreferences.getBool(key);
   }
+
+  @override
+  setBool(String key, bool value) {
+    sharedPreferences.setBool(key, value);
+  }
   
   @override
   Stream<List<CovidData>> watchAllCovidData(){
@@ -54,7 +59,9 @@ class CovidDataRepositoryImpl implements CovidDataRepository{
 
       List<CovidData> insertElements = [];
       list.forEach((f) => insertElements.add(CovidDataMapper.convertToDb(f)));
+      covidDataDao.deleteAllCovidData();
       covidDataDao.updateAllCovidData(insertElements);
+      //insertElements.forEach((f) => covidDataDao.insertEvent(f));
     }
   }
 

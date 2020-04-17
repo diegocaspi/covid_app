@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
-import 'package:covid_app/presentation/bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -40,7 +39,8 @@ class CovidDataBloc extends Bloc<CovidDataEvent, CovidDataState> {
 
     try{
       final data = await covidDataRepository.getAllCovidData();
-      yield CovidDataLoaded(datas: data);
+      
+      yield CovidDataLoaded(datas: data, italy: true, region: "italy");
     } catch (_) {
       yield CovidDataLoadError();
     }
@@ -51,7 +51,7 @@ class CovidDataBloc extends Bloc<CovidDataEvent, CovidDataState> {
 
     try{
       final data = await covidDataRepository.getDataFromRegion(region);
-      yield CovidDataLoaded(datas: data);
+      yield CovidDataLoaded(datas: data, italy: false, region: region);
     } catch (_) {
       yield CovidDataLoadError();
     }
@@ -62,6 +62,7 @@ class CovidDataBloc extends Bloc<CovidDataEvent, CovidDataState> {
 
     try{
       covidDataRepository.updateCovidData();
+      covidDataRepository.setBool("first_start", false);
       yield CovidDataUpdated();
     } catch (_) {
       yield CovidDataUpdateError();

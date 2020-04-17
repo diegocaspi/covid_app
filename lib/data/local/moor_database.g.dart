@@ -8,6 +8,7 @@ part of 'moor_database.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
 class CovidData extends DataClass implements Insertable<CovidData> {
+  final int id;
   final String name;
   final DateTime data;
   final int totPositivi;
@@ -16,7 +17,8 @@ class CovidData extends DataClass implements Insertable<CovidData> {
   final int terapiaIntensiva;
   final int nuoviPositivi;
   CovidData(
-      {@required this.name,
+      {this.id,
+      @required this.name,
       @required this.data,
       @required this.totPositivi,
       @required this.deceduti,
@@ -26,10 +28,11 @@ class CovidData extends DataClass implements Insertable<CovidData> {
   factory CovidData.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
     final dateTimeType = db.typeSystem.forDartType<DateTime>();
-    final intType = db.typeSystem.forDartType<int>();
     return CovidData(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       name: stringType.mapFromDatabaseResponse(data['${effectivePrefix}name']),
       data:
           dateTimeType.mapFromDatabaseResponse(data['${effectivePrefix}data']),
@@ -49,6 +52,7 @@ class CovidData extends DataClass implements Insertable<CovidData> {
       {ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return CovidData(
+      id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       data: serializer.fromJson<DateTime>(json['data']),
       totPositivi: serializer.fromJson<int>(json['totPositivi']),
@@ -62,6 +66,7 @@ class CovidData extends DataClass implements Insertable<CovidData> {
   Map<String, dynamic> toJson({ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
       'data': serializer.toJson<DateTime>(data),
       'totPositivi': serializer.toJson<int>(totPositivi),
@@ -75,6 +80,7 @@ class CovidData extends DataClass implements Insertable<CovidData> {
   @override
   CovidDatasCompanion createCompanion(bool nullToAbsent) {
     return CovidDatasCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
       name: name == null && nullToAbsent ? const Value.absent() : Value(name),
       data: data == null && nullToAbsent ? const Value.absent() : Value(data),
       totPositivi: totPositivi == null && nullToAbsent
@@ -96,7 +102,8 @@ class CovidData extends DataClass implements Insertable<CovidData> {
   }
 
   CovidData copyWith(
-          {String name,
+          {int id,
+          String name,
           DateTime data,
           int totPositivi,
           int deceduti,
@@ -104,6 +111,7 @@ class CovidData extends DataClass implements Insertable<CovidData> {
           int terapiaIntensiva,
           int nuoviPositivi}) =>
       CovidData(
+        id: id ?? this.id,
         name: name ?? this.name,
         data: data ?? this.data,
         totPositivi: totPositivi ?? this.totPositivi,
@@ -115,6 +123,7 @@ class CovidData extends DataClass implements Insertable<CovidData> {
   @override
   String toString() {
     return (StringBuffer('CovidData(')
+          ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('data: $data, ')
           ..write('totPositivi: $totPositivi, ')
@@ -128,21 +137,24 @@ class CovidData extends DataClass implements Insertable<CovidData> {
 
   @override
   int get hashCode => $mrjf($mrjc(
-      name.hashCode,
+      id.hashCode,
       $mrjc(
-          data.hashCode,
+          name.hashCode,
           $mrjc(
-              totPositivi.hashCode,
+              data.hashCode,
               $mrjc(
-                  deceduti.hashCode,
+                  totPositivi.hashCode,
                   $mrjc(
-                      dimessiGuariti.hashCode,
-                      $mrjc(terapiaIntensiva.hashCode,
-                          nuoviPositivi.hashCode)))))));
+                      deceduti.hashCode,
+                      $mrjc(
+                          dimessiGuariti.hashCode,
+                          $mrjc(terapiaIntensiva.hashCode,
+                              nuoviPositivi.hashCode))))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other is CovidData &&
+          other.id == this.id &&
           other.name == this.name &&
           other.data == this.data &&
           other.totPositivi == this.totPositivi &&
@@ -153,6 +165,7 @@ class CovidData extends DataClass implements Insertable<CovidData> {
 }
 
 class CovidDatasCompanion extends UpdateCompanion<CovidData> {
+  final Value<int> id;
   final Value<String> name;
   final Value<DateTime> data;
   final Value<int> totPositivi;
@@ -161,6 +174,7 @@ class CovidDatasCompanion extends UpdateCompanion<CovidData> {
   final Value<int> terapiaIntensiva;
   final Value<int> nuoviPositivi;
   const CovidDatasCompanion({
+    this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.data = const Value.absent(),
     this.totPositivi = const Value.absent(),
@@ -170,6 +184,7 @@ class CovidDatasCompanion extends UpdateCompanion<CovidData> {
     this.nuoviPositivi = const Value.absent(),
   });
   CovidDatasCompanion.insert({
+    this.id = const Value.absent(),
     @required String name,
     @required DateTime data,
     @required int totPositivi,
@@ -185,7 +200,8 @@ class CovidDatasCompanion extends UpdateCompanion<CovidData> {
         terapiaIntensiva = Value(terapiaIntensiva),
         nuoviPositivi = Value(nuoviPositivi);
   CovidDatasCompanion copyWith(
-      {Value<String> name,
+      {Value<int> id,
+      Value<String> name,
       Value<DateTime> data,
       Value<int> totPositivi,
       Value<int> deceduti,
@@ -193,6 +209,7 @@ class CovidDatasCompanion extends UpdateCompanion<CovidData> {
       Value<int> terapiaIntensiva,
       Value<int> nuoviPositivi}) {
     return CovidDatasCompanion(
+      id: id ?? this.id,
       name: name ?? this.name,
       data: data ?? this.data,
       totPositivi: totPositivi ?? this.totPositivi,
@@ -209,6 +226,15 @@ class $CovidDatasTable extends CovidDatas
   final GeneratedDatabase _db;
   final String _alias;
   $CovidDatasTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn('id', $tableName, true,
+        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+  }
+
   final VerificationMeta _nameMeta = const VerificationMeta('name');
   GeneratedTextColumn _name;
   @override
@@ -303,6 +329,7 @@ class $CovidDatasTable extends CovidDatas
 
   @override
   List<GeneratedColumn> get $columns => [
+        id,
         name,
         data,
         totPositivi,
@@ -321,6 +348,9 @@ class $CovidDatasTable extends CovidDatas
   VerificationContext validateIntegrity(CovidDatasCompanion d,
       {bool isInserting = false}) {
     final context = VerificationContext();
+    if (d.id.present) {
+      context.handle(_idMeta, id.isAcceptableValue(d.id.value, _idMeta));
+    }
     if (d.name.present) {
       context.handle(
           _nameMeta, name.isAcceptableValue(d.name.value, _nameMeta));
@@ -373,7 +403,7 @@ class $CovidDatasTable extends CovidDatas
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {name};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   CovidData map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
@@ -383,6 +413,9 @@ class $CovidDatasTable extends CovidDatas
   @override
   Map<String, Variable> entityToSql(CovidDatasCompanion d) {
     final map = <String, Variable>{};
+    if (d.id.present) {
+      map['id'] = Variable<int, IntType>(d.id.value);
+    }
     if (d.name.present) {
       map['name'] = Variable<String, StringType>(d.name.value);
     }

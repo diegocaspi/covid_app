@@ -1,6 +1,6 @@
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
+import 'package:covid_app/presentation/bloc/bloc.dart';
 import 'package:covid_app/presentation/pages/home/home_page.dart';
-import 'package:covid_app/presentation/pages/intro/intro_page.dart';
 import 'package:covid_app/presentation/pages/intro/intro_slideshow_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -25,9 +25,10 @@ class _SplashPageState extends State<SplashPage> {
           MaterialPageRoute(builder: (context) => IntroSlideShowPage()));
       });
     } else {
+      BlocProvider.of<CovidDataBloc>(context).add(UpdateCovidData());
       SchedulerBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomePage()));
+          MaterialPageRoute(builder: (context) => BeforeHomePage()));
       });
     }
 

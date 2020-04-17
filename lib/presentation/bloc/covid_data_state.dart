@@ -12,9 +12,13 @@ class CovidDataNotLoadIn extends CovidDataState {}
 
 class CovidDataLoaded extends CovidDataState{
   final List<CovidData> datas;
+  final String region;
+  final bool italy;
 
   CovidDataLoaded({
     @required this.datas,
+    @required this.region,
+    @required this.italy,
   });
 }
 

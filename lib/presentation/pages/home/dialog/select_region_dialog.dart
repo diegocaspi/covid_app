@@ -21,8 +21,7 @@ class RegionsDialog extends StatelessWidget {
             return ListTile(
               title: Text(region),
               onTap: () {
-                Navigator.pop(context);
-
+                Navigator.of(context).pop();
                 BlocProvider.of<CovidDataBloc> (context).add(
                   GetCovidDataFromRegion(region: region)
                 );

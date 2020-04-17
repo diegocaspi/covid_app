@@ -4,12 +4,13 @@ import 'package:covid_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../lib/core/di/injection_container.dart' as di;
+import 'package:covid_app/data/local/moor_database.dart';
 
 void main() {
-  group("italy test", (){
+  group("italy test", () {
     test("italy test", () async {
       WidgetsFlutterBinding.ensureInitialized();
-      
+
       await di.init();
       CovidDataRepositoryImpl imp = CovidDataRepositoryImpl(
         covidDataDao: di.sl(),
@@ -17,12 +18,16 @@ void main() {
         sharedPreferences: di.sl(),
       );
 
-      List<CovidDataElement> covidDataElement = await imp.fetchData();
-      Map<DateTime, int> italyTotPositivi = 
-        Utils.getItalyDeceduti(Utils.getDailyMap(
-          Utils.convertDataToDb(covidDataElement)) );
-      
-      italyTotPositivi.forEach((k, v) => print('${k}: ${v}'));
+      await imp.updateCovidData();
+
+      List<CovidData> data = await imp.getAllCovidData();
+
+      data.forEach((f) => print(f.data.toString() + f.name));
+      /* List<CovidDataElement> covidDataElement = await imp.fetchData();
+      Map<DateTime, int> italyTotPositivi = Utils.getItalyTotPositivi(
+          Utils.getDailyMap(Utils.convertDataToDb(covidDataElement)));
+
+      italyTotPositivi.forEach((k, v) => print('${k}: ${v}')); */
     });
   });
 }

@@ -78,11 +78,11 @@ class TopBar extends StatelessWidget {
 
   Widget _buildBox(BuildContext context){
     return Card(
+      borderOnForeground: true,
       margin: EdgeInsets.zero,
       child: Center(
         child: Container(
-          height: double.infinity,
-          //width: double.infinity,
+          height: 100,
           padding: const EdgeInsets.all(0.0),
           child: FlatButton(
             textColor: Theme.of(context).primaryColor,

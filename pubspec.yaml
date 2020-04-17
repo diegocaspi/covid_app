@@ -36,6 +36,10 @@ dependencies:
 
   liquid_swipe: ^1.4.2
 
+  google_fonts:
+
+  charts_flutter:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

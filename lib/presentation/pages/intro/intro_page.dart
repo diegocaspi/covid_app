@@ -18,7 +18,7 @@ class _IntroPageState extends State<IntroPage> {
         listener: (context, state) {
           if(state is CovidDataUpdated){
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) => BeforeHomePage(),
             ));
           }
         },

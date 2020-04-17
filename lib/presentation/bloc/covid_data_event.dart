@@ -10,9 +10,10 @@ class GetAllCovidData extends CovidDataEvent {}
 
 class GetCovidDataFromRegion extends CovidDataEvent {
   final String region;
+  //List<CovidData> datas;
 
   GetCovidDataFromRegion({
-    @required this.region,
+    @required this.region
   });
 }
 

@@ -4,6 +4,7 @@ import 'package:covid_app/domain/entities/covid_data.dart';
 class CovidDataMapper{
   static CovidData convertToDb(CovidDataElement e){
     return CovidData(
+      //id: null,
       data: e.data,
       name: e.name,
       totPositivi: e.totPositivi,

@@ -6,6 +6,8 @@ abstract class CovidDataRepository{
 
   bool getBool(String key);
 
+  setBool(String key, bool value);
+
   Stream<List<CovidData>> watchAllCovidData();
 
   Future<List<CovidData>> getAllCovidData();

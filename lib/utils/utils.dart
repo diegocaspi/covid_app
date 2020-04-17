@@ -17,6 +17,20 @@ class Utils{
     return ret;
   }
 
+  static Map<String, Map<DateTime, int>> getItalyFullMap(List<CovidData> data){
+    Map<String, Map<DateTime, int>> ret = new Map();
+
+    Map<DateTime, List<CovidData>> dailyMap = getDailyMap(data);
+
+    ret['positivi'] = getItalyTotPositivi(dailyMap);
+    ret['deceduti'] = getItalyDeceduti(dailyMap);
+    ret['dimessi'] = getItalyDimessi(dailyMap);
+    ret['terapia_intensiva'] = getItalyTerapiaIntensiva(dailyMap);
+    ret['nuovi_positivi'] = getItalyNuoviPositivi(dailyMap);
+
+    return ret;
+  }
+
   static List<CovidData> convertDataToDb(List<CovidDataElement> data){
     List<CovidData> ret = [];
     data.forEach((f) => ret.add(CovidDataMapper.convertToDb(f)));
