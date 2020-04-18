@@ -24,10 +24,10 @@ class CovidDataDao extends DatabaseAccessor<AppDatabase>
   Future deleteCovidData(CovidData data) => delete(covidDatas).delete(data);
 
   Future updateAllCovidData(List<CovidData> data) async {
-    /* await batch((b) {
+    await batch((b) {
       b.insertAll(covidDatas, data);
-    }); */
-    data.forEach((f) => into(covidDatas).insert(f, orReplace: true));
+    });
+    //data.forEach((f) => into(covidDatas).insert(f, orReplace: true));
   }
 
   Future deleteAllCovidData() => delete(covidDatas).go();
