@@ -26,6 +26,7 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<CovidDataBloc>(context).add(UpdateCovidData());
     BlocProvider.of<CovidDataBloc>(context).add(GetAllCovidData());
   }
 
