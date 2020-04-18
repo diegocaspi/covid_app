@@ -168,7 +168,7 @@ class RegionPage extends StatelessWidget {
         children: <Widget>[
           Center(
             child: Text(
-              "Grafico Totale Contagiati",
+              "Grafico Totale Attualmente Contagiati",
               style: GoogleFonts.lato(fontSize: 30, color: Colors.redAccent),
             ),
           ),

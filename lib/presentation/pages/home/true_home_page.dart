@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                             children: <Widget>[
                               Center(
                                 child: Text(
-                                  "Grafico Totale Contagiati",
+                                  "Grafico Totale Attualmente Contagiati",
                                   style: GoogleFonts.lato(
                                       fontSize: 30, color: Colors.redAccent),
                                 ),
@@ -266,7 +266,7 @@ class HomePage extends StatelessWidget {
 
     LineChart chart;
     chart = LineChart.fromDateTimeMaps(
-        [line1], [Colors.blue], ['Totale contagiati'],
+        [line1], [Colors.blue], ['Totale attualmente contagiati'],
         tapTextFontWeight: FontWeight.w400);
 
     return Container(
