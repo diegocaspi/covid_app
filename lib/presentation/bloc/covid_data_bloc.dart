@@ -61,7 +61,7 @@ class CovidDataBloc extends Bloc<CovidDataEvent, CovidDataState> {
     yield CovidDataNotUpdated();
 
     try{
-      covidDataRepository.updateCovidData();
+      await covidDataRepository.updateCovidData();
       covidDataRepository.setBool("first_start", false);
       yield CovidDataUpdated();
     } catch (_) {

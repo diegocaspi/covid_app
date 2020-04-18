@@ -3,7 +3,6 @@ import 'package:covid_app/presentation/bloc/covid_data_bloc.dart';
 import 'package:covid_app/presentation/pages/home/true_home_page.dart';
 import 'package:covid_app/presentation/pages/region/region_page.dart';
 import 'package:covid_app/utils/utils.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,16 +37,10 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
           BlocListener<CovidDataBloc, CovidDataState>(
             listener: (context, state) {
               if(state is CovidDataLoaded){
-                if(state.italy == false){
-                  Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => RegionPage(datas: state.datas, region: state.region),
-                ));
-                } else {
                   italyData = Utils.getItalyFullMap(state.datas);
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (context) => HomePage(italyData: italyData, data: state.datas),
                   ));
-                }
               }
             },
             child: BlocBuilder<CovidDataBloc, CovidDataState>(
@@ -72,15 +65,6 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
   Widget _buildUpdating(){
     return Center(
       child: CircularProgressIndicator(),
-    );
-  }
-
-  Widget _buildGraphics(List<CovidData> data){
-    LineChartData chartData = LineChartData();
-    
-    //LineChart chart = new LineChart(data);
-    return Text(
-      "ciao"
     );
   }
 

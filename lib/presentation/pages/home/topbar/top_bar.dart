@@ -13,7 +13,7 @@ class TopBar extends StatelessWidget {
         Container(
           height: 140,
           decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
+            color: Colors.lightBlue,
           ),
         ),
         _topSection(context),

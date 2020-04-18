@@ -10,6 +10,6 @@ class CovidDatas extends Table{
   IntColumn get terapiaIntensiva => integer()();
   IntColumn get nuoviPositivi => integer()();
 
-  /* @override
-  Set<Column> get primaryKey => {id}; */
+  @override
+  Set<Column> get primaryKey => {id};
 }

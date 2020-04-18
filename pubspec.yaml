@@ -3,7 +3,7 @@ description: App used to see the trend of CoronaVirus
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   
@@ -32,13 +32,14 @@ dependencies:
   intl:
 
   data_connection_checker: ^0.3.4
-  fl_chart: ^0.9.0
 
   liquid_swipe: ^1.4.2
 
   google_fonts:
 
-  charts_flutter:
+  fl_animated_linechart:
+
+  pull_to_refresh:
 
 dev_dependencies:
   flutter_test:

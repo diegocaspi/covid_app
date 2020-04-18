@@ -30,7 +30,7 @@ class _IntroSlideShowPageState extends State<IntroSlideShowPage> {
                   color: Colors.white,
                   size: 150,
                 ),
-                backgroundColor: Theme.of(context).primaryColor,
+                backgroundColor: Colors.blueAccent,
                 textColor: Colors.white,
               ),
             ),
@@ -41,11 +41,11 @@ class _IntroSlideShowPageState extends State<IntroSlideShowPage> {
                 subtitle: "Tieni d'occhi l'andamento del Covid-19 in ogni regione italiana",
                 centerWidget: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.white,
+                  color: Colors.blueAccent,
                   size: 150,
                 ),
-                backgroundColor: Theme.of(context).primaryColor,
-                textColor: Colors.white,
+                backgroundColor: Colors.white,
+                textColor: Colors.blueAccent,
               ),
             ),
             Container(
