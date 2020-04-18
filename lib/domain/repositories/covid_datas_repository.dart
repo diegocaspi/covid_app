@@ -1,6 +1,5 @@
 
 import 'package:covid_app/data/local/moor_database.dart';
-import 'package:covid_app/domain/entities/covid_data.dart';
 
 abstract class CovidDataRepository{
 

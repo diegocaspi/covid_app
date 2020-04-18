@@ -1,23 +1,22 @@
-
 import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/domain/entities/covid_data.dart';
 import 'package:covid_app/domain/entities/mapper/covid_data_mapper.dart';
+import 'package:flutter/material.dart';
 
-class Utils{
-
-  static Map<DateTime, List<CovidData>> getDailyMap(List<CovidData> data){
+class Utils {
+  static Map<DateTime, List<CovidData>> getDailyMap(List<CovidData> data) {
     Map<DateTime, List<CovidData>> ret = new Map();
     data.forEach((element) {
-      if(ret[element.data] != null){
+      if (ret[element.data] != null) {
         ret[element.data].add(element);
-      } else{
+      } else {
         ret[element.data] = [element];
       }
     });
     return ret;
   }
 
-  static Map<String, Map<DateTime, int>> getItalyFullMap(List<CovidData> data){
+  static Map<String, Map<DateTime, int>> getItalyFullMap(List<CovidData> data) {
     Map<String, Map<DateTime, int>> ret = new Map();
 
     Map<DateTime, List<CovidData>> dailyMap = getDailyMap(data);
@@ -31,17 +30,18 @@ class Utils{
     return ret;
   }
 
-  static List<CovidData> convertDataToDb(List<CovidDataElement> data){
+  static List<CovidData> convertDataToDb(List<CovidDataElement> data) {
     List<CovidData> ret = [];
     data.forEach((f) => ret.add(CovidDataMapper.convertToDb(f)));
     return ret;
   }
 
-  static DateTime convertStringToDate(String date){
+  static DateTime convertStringToDate(String date) {
     return DateTime.parse(date);
   }
 
-  static Map<DateTime, int> getItalyTotPositivi(Map<DateTime, List<CovidData>> source){
+  static Map<DateTime, int> getItalyTotPositivi(
+      Map<DateTime, List<CovidData>> source) {
     Map<DateTime, int> ret = {};
     source.forEach((k, v) {
       int tot = 0;
@@ -51,7 +51,8 @@ class Utils{
     return ret;
   }
 
-  static Map<DateTime, int> getItalyDeceduti(Map<DateTime, List<CovidData>> source){
+  static Map<DateTime, int> getItalyDeceduti(
+      Map<DateTime, List<CovidData>> source) {
     Map<DateTime, int> ret = {};
     source.forEach((k, v) {
       int tot = 0;
@@ -61,7 +62,8 @@ class Utils{
     return ret;
   }
 
-  static Map<DateTime, int> getItalyDimessi(Map<DateTime, List<CovidData>> source){
+  static Map<DateTime, int> getItalyDimessi(
+      Map<DateTime, List<CovidData>> source) {
     Map<DateTime, int> ret = {};
     source.forEach((k, v) {
       int tot = 0;
@@ -71,7 +73,8 @@ class Utils{
     return ret;
   }
 
-  static Map<DateTime, int> getItalyTerapiaIntensiva(Map<DateTime, List<CovidData>> source){
+  static Map<DateTime, int> getItalyTerapiaIntensiva(
+      Map<DateTime, List<CovidData>> source) {
     Map<DateTime, int> ret = {};
     source.forEach((k, v) {
       int tot = 0;
@@ -81,7 +84,8 @@ class Utils{
     return ret;
   }
 
-  static Map<DateTime, int> getItalyNuoviPositivi(Map<DateTime, List<CovidData>> source){
+  static Map<DateTime, int> getItalyNuoviPositivi(
+      Map<DateTime, List<CovidData>> source) {
     Map<DateTime, int> ret = {};
     source.forEach((k, v) {
       int tot = 0;
@@ -89,5 +93,13 @@ class Utils{
       ret[k] = tot;
     });
     return ret;
+  }
+}
+
+class NoGlowBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }

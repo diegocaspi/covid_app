@@ -23,33 +23,29 @@ class CovidDataBloc extends Bloc<CovidDataEvent, CovidDataState> {
   Stream<CovidDataState> mapEventToState(
     CovidDataEvent event,
   ) async* {
-    if(event is GetAllCovidData){
+    if (event is GetAllCovidData) {
       yield* _mapGetAllCovidDataToState();
-
-    } else if(event is GetCovidDataFromRegion){
+    } else if (event is GetCovidDataFromRegion) {
       yield* _mapGetCovidDataFromRegionToState(event.region);
-
     } else {
       yield* _mapUpdateAllCovidData();
     }
   }
 
   Stream<CovidDataState> _mapGetAllCovidDataToState() async* {
-    yield CovidDataNotLoadIn();
-
-    try{
+    yield CovidDataLoadInProgress();
+    try {
       final data = await covidDataRepository.getAllCovidData();
-      
       yield CovidDataLoaded(datas: data, italy: true, region: "italy");
     } catch (_) {
       yield CovidDataLoadError();
     }
   }
 
-  Stream<CovidDataState> _mapGetCovidDataFromRegionToState(String region) async* {
-    yield CovidDataNotLoadIn();
-
-    try{
+  Stream<CovidDataState> _mapGetCovidDataFromRegionToState(
+      String region) async* {
+    yield CovidDataLoadInProgress();
+    try {
       final data = await covidDataRepository.getDataFromRegion(region);
       yield CovidDataLoaded(datas: data, italy: false, region: region);
     } catch (_) {
@@ -59,10 +55,8 @@ class CovidDataBloc extends Bloc<CovidDataEvent, CovidDataState> {
 
   Stream<CovidDataState> _mapUpdateAllCovidData() async* {
     yield CovidDataNotUpdated();
-
-    try{
+    try {
       await covidDataRepository.updateCovidData();
-      covidDataRepository.setBool("first_start", false);
       yield CovidDataUpdated();
     } catch (_) {
       yield CovidDataUpdateError();

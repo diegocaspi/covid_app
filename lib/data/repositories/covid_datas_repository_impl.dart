@@ -70,7 +70,6 @@ class CovidDataRepositoryImpl implements CovidDataRepository{
 
     if(response.statusCode == 200){
       List<CovidDataElement> d = (json.decode(response.body) as List).map((e) => new CovidDataElement.fromJson(e)).toList();
-      d.forEach((f) => print(f.name));
       return d;
     } else {
       throw Exception("Failed to load");

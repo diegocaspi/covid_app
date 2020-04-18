@@ -8,109 +8,109 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    final hour = TimeOfDay.fromDateTime(DateTime.now());
+
+    return Column(
       children: <Widget>[
         Container(
-          height: 140,
-          decoration: BoxDecoration(
-            color: Colors.lightBlue,
+          padding: const EdgeInsets.all(16.0),
+          width: MediaQuery.of(context).size.width,
+          // decoration: BoxDecoration(
+          //   color: Theme.of(context).primaryColor,
+          // ),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 36,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        _getMessageFromHour(hour),
+                        style: TextStyle(
+                          fontSize: 23,
+                        ),
+                      ),
+                      Text(
+                        _todayDate(DateTime.now()),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(
+                          Icons.settings,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SettingsPage(),
+                          ));
+                        },
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-        _topSection(context),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            height: 50.0,
+            child: RaisedButton(
+              onPressed: () {
+                showDialog(
+                    context: context, builder: (context) => RegionsDialog());
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(80.0)),
+              padding: EdgeInsets.all(0.0),
+              child: Ink(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Theme.of(context).primaryColor,
+                        Color(0xff64B6FF)
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Visualizza per regione',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        // RaisedButton(
+        //   child: Text('Visualizza per regione'),
+        //   onPressed: () {},
+        // )
       ],
     );
   }
 
-  Widget _topSection(BuildContext context){
-    final hour = TimeOfDay.fromDateTime(DateTime.now());
-
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 42, 16, 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    _getMessageFromHour(hour),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 23,
-                    ),
-                  ),
-                  Text(
-                    _todayDate(DateTime.now()),
-                    style: TextStyle(
-                          color: Colors.white,
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.settings,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => SettingsPage(),
-                      ));
-                    },
-                  )
-                ],
-              )
-            ],
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          _buildBox(context),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBox(BuildContext context){
-    return Card(
-      borderOnForeground: true,
-      margin: EdgeInsets.zero,
-      child: Center(
-        child: Container(
-          height: 100,
-          padding: const EdgeInsets.all(0.0),
-          child: FlatButton(
-            textColor: Theme.of(context).primaryColor,
-            child: Text(
-              "Seleziona regione",
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            onPressed: () {
-              showDialog(
-                context: context, builder: (context) => RegionsDialog()
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-  String _getMessageFromHour(TimeOfDay time){
+  String _getMessageFromHour(TimeOfDay time) {
     if (time.hour < 13) return 'Buona mattina.';
     if (time.hour < 18) return 'Buon pomeriggio.';
     return 'Buona serata.';
   }
 
-  String _todayDate(DateTime date){
-    var formatter = new DateFormat.yMMMMd('en_US');
+  String _todayDate(DateTime date) {
+    var formatter = new DateFormat.yMMMMd('it_IT');
     return formatter.format(date);
   }
 }

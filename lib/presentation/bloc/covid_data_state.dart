@@ -1,16 +1,16 @@
 part of 'covid_data_bloc.dart';
 
 @immutable
-abstract class CovidDataState extends Equatable{
+abstract class CovidDataState extends Equatable {
   @override
   List<Object> get props => null;
 }
 
 class CovidDataNotLoaded extends CovidDataState {}
 
-class CovidDataNotLoadIn extends CovidDataState {}
+class CovidDataLoadInProgress extends CovidDataState {}
 
-class CovidDataLoaded extends CovidDataState{
+class CovidDataLoaded extends CovidDataState {
   final List<CovidData> datas;
   final String region;
   final bool italy;
@@ -22,7 +22,7 @@ class CovidDataLoaded extends CovidDataState{
   });
 }
 
-class CovidDataLoadError extends CovidDataState{}
+class CovidDataLoadError extends CovidDataState {}
 
 class CovidDataNotUpdated extends CovidDataState {}
 

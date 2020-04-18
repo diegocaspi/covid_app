@@ -17,6 +17,7 @@ class _IntroPageState extends State<IntroPage> {
       body: BlocListener<CovidDataBloc, CovidDataState> (
         listener: (context, state) {
           if(state is CovidDataUpdated){
+            
             //BlocProvider.of<CovidDataBloc>(context).add(GetAllCovidData());
             Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (context) => BeforeHomePage(),

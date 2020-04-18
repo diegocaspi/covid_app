@@ -1,6 +1,6 @@
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
-import 'package:covid_app/utils/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import '../lib/core/di/injection_container.dart' as di;
 
 void main() {
