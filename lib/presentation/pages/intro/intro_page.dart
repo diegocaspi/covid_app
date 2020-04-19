@@ -1,7 +1,9 @@
+import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
 import 'package:covid_app/presentation/bloc/bloc.dart';
 import 'package:covid_app/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroPage extends StatefulWidget {
   IntroPage({Key key}) : super(key: key);
@@ -17,7 +19,7 @@ class _IntroPageState extends State<IntroPage> {
       body: BlocListener<CovidDataBloc, CovidDataState> (
         listener: (context, state) {
           if(state is CovidDataUpdated){
-            
+            RepositoryProvider.of<CovidDataRepository>(context).setBool("first_start", false);
             //BlocProvider.of<CovidDataBloc>(context).add(GetAllCovidData());
             Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (context) => BeforeHomePage(),
@@ -96,7 +98,7 @@ class _IntroPageState extends State<IntroPage> {
           SizedBox(
             height: 20,
           ),
-          Text('Errore nello scaricamento delle domande'),
+          Text('Errore nello scaricamento dei dati'),
           SizedBox(
             height: 20,
           ),

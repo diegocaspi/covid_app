@@ -49,9 +49,18 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   moor_generator: ^2.1.0
+
   mockito: ^4.1.0
+
+  flutter_launcher_icons:
+
   build_runner:
-    
+
+flutter_icons:
+  android: "launcher_icon" 
+  ios: true
+  image_path: "assets/icons/icon.png"
+
 flutter:
   # the material Icons class.
   uses-material-design: true
