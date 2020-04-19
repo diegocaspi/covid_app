@@ -101,7 +101,7 @@ class _RegionPageState extends State<RegionPage> {
               height: 16,
             ),
             Text(
-              "Totale nuovi contagiati di oggi: " +
+              "Totale nuovi casi di oggi: " +
                   datas.elementAt(datas.length - 1).nuoviPositivi.toString(),
             ),
           ],

@@ -154,7 +154,7 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
                     height: 16,
                   ),
                   Text(
-                    "Totale nuovi contagiati di oggi: " +
+                    "Totale nuovi casi di oggi: " +
                         convertedData['nuovi_positivi']
                             .values
                             .elementAt(

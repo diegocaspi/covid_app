@@ -26,7 +26,7 @@ class HomeGraphsList extends StatelessWidget {
           graph: _buildGraphicTotaleDimessi(convertedData, context),
         ),
         _buildChart(
-          title: "Totale nuovi contagiati",
+          title: "Totale nuovi casi",
           graph: _buildGraphicTotaleNuoviContagiati(convertedData, context),
         ),
         _buildChart(
@@ -137,7 +137,7 @@ class HomeGraphsList extends StatelessWidget {
 
     LineChart chart;
     chart = LineChart.fromDateTimeMaps(
-        [line1], [Colors.blue], ['Totale Nuovi Contagiati'],
+        [line1], [Colors.blue], ['Totale Nuovi Casi'],
         tapTextFontWeight: FontWeight.w400);
 
     return Container(
