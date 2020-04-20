@@ -13,48 +13,57 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  bool switchValue = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Impostazioni'),
-      ),
-      body: Column(
-        children: <Widget>[
-          _buildAboutUs(),
-          _buildDarkModeSwitch(),
-          _buildContactUs(),
-          _buildPackageInfo()
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDarkModeSwitch(){
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
-        return ListTile(
-          title: Text('Tema scuro'),
-          trailing: Switch(
-            value: state.materialThemeData.brightness == Brightness.dark,
-            onChanged: (value) => BlocProvider.of<ThemeBloc>(context).add(
-                ThemeChanged(theme: (value)?AppTheme.Dark:AppTheme.Light)
-            ),
+        switchValue = state.materialThemeData.brightness == Brightness.dark;
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Impostazioni'),
+          ),
+          body: Column(
+            children: <Widget>[
+              _buildAboutUs(),
+              _buildDarkModeSwitch(),
+              _buildContactUs(),
+              _buildPackageInfo()
+            ],
           ),
         );
       },
     );
   }
 
+  Widget _buildDarkModeSwitch() {
+        return ListTile(
+          title: Text('Tema scuro'),
+          trailing: Switch(
+            value: switchValue,
+            onChanged: (_) => _darkModeOnSwitch(context)
+          ),
+          onTap: () => _darkModeOnSwitch(context),
+        );
+  }
+
+  void _darkModeOnSwitch(BuildContext context){
+    BlocProvider.of<ThemeBloc>(context).add(
+        ThemeChanged(theme: (!switchValue) ? AppTheme.Dark : AppTheme.Light));
+  }
+
   Widget _buildPackageInfo() {
     return ListTile(
       title: Text("Informazioni"),
-      subtitle: Text('Informazioni sulle licenze e sulla versione dell\'applicazione'),
+      subtitle: Text(
+          'Informazioni sulle licenze e sulla versione dell\'applicazione'),
       onTap: () async {
         PackageInfo packageInfo = await PackageInfo.fromPlatform();
         showDialog(
             context: context,
-            builder: (context) => AboutAppDialog(
+            builder: (context) =>
+                AboutAppDialog(
                   packageInfo: packageInfo,
                 ));
       },
@@ -124,27 +133,24 @@ class _SettingsPageState extends State<SettingsPage> {
               return SimpleDialog(
                 title: Text("Contattaci"),
                 children: <Widget>[
-                  SimpleDialogOption(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('Diego Caspi'),
-                    ),
-                    onPressed: () {
-                      _launchURL("diego.caspi@zuccante.it");
-                    },
-                  ),
-                  SimpleDialogOption(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('Riccardo Calligaro'),
-                    ),
-                    onPressed: () {
-                      _launchURL("riccardocalligaro@gmail.com");
-                    },
-                  )
+                  _buildContactDialogOption("Diego Caspi", "diego.caspi@zuccante.it"),
+                  _buildContactDialogOption("Riccardo Calligaro", "riccardocalligaro@gmail.com"),
+                  _buildContactDialogOption("Leone Bacciu", "leonebacciu@gmail.com")
                 ],
               );
             });
+      },
+    );
+  }
+
+  Widget _buildContactDialogOption(String name, String mail) {
+    return SimpleDialogOption(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Text(name),
+      ),
+      onPressed: () {
+        _launchURL(mail);
       },
     );
   }

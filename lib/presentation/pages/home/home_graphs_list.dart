@@ -64,6 +64,7 @@ class HomeGraphsList extends StatelessWidget {
 
   Widget _buildGraphicTotaleContagiati(
       Map<String, Map<DateTime, int>> convertedData, BuildContext context) {
+
     Map<DateTime, double> line1 = {};
     convertedData['positivi'].forEach((k, v) {
       line1.putIfAbsent(k, () => v.toDouble());
