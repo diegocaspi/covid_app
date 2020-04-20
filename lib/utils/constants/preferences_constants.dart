@@ -1,5 +1,5 @@
 class PrefsConstants {
 
-  static String DARK_THEME = 'dark_theme';
+  static String darkTheme = 'dark_theme';
 
 }

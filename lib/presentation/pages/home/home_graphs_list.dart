@@ -78,7 +78,7 @@ class HomeGraphsList extends StatelessWidget {
       height: 240,
       width: MediaQuery.of(context).size.width,
       child: AnimatedLineChart(
-        chart,  
+        chart,
         key: UniqueKey(),
       ),
     );

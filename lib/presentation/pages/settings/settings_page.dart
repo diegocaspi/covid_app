@@ -34,7 +34,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         return ListTile(
-          title: Text("DarkMode"),
+          title: Text('Tema scuro'),
           trailing: Switch(
             value: state.materialThemeData.brightness == Brightness.dark,
             onChanged: (value) => BlocProvider.of<ThemeBloc>(context).add(

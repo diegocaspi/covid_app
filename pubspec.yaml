@@ -45,6 +45,8 @@ dependencies:
   
   package_info:
 
+  # fl_chart:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

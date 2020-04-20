@@ -78,7 +78,7 @@ class ContentCard extends StatelessWidget {
               elevation: 0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50)),
-              color: Colors.red,
+              color: Colors.blue,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                     vertical: 14.0, horizontal: 14.0),
@@ -142,7 +142,7 @@ class ContentCard extends StatelessWidget {
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)),
-                  color: Colors.red,
+                  color: Colors.blue,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Text(

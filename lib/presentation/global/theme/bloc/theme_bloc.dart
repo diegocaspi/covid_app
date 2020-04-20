@@ -76,13 +76,13 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
   _loadSettings() async {
     if (prefs == null) prefs = await SharedPreferences.getInstance();
-    bool _darkTheme = prefs.getBool(PrefsConstants.DARK_THEME) ?? true;
+    bool _darkTheme = prefs.getBool(PrefsConstants.darkTheme) ?? true;
     add(ThemeChanged(theme: _darkTheme ? AppTheme.Dark : AppTheme.Light));
     return _darkTheme;
   }
 
   _saveSettings(bool darkTheme) async {
     if (prefs == null) prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(PrefsConstants.DARK_THEME, darkTheme);
+    await prefs.setBool(PrefsConstants.darkTheme, darkTheme);
   }
 }

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 
 final material = ThemeData(
-  primarySwatch: Colors.red,
-  accentColor: Colors.red,
-  primaryColor: Colors.red,
+  primarySwatch: Colors.blue,
+  accentColor: Colors.blueAccent,
+  primaryColor: Colors.blue,
   brightness: Brightness.dark,
   fontFamily: 'Montserrat',
   appBarTheme: AppBarTheme(

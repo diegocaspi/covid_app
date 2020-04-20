@@ -29,10 +29,15 @@ class _RegionPageState extends State<RegionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.region),
+        title: Text(
+          widget.region,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: Theme.of(context).brightness == Brightness.dark
-        ? Colors.blueAccent
-        : Colors.lightBlue,
+            ? Colors.blueAccent
+            : Colors.lightBlue,
       ),
       body: BlocBuilder<RegionBloc, RegionState>(
         builder: (context, state) {

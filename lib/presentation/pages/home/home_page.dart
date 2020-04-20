@@ -1,3 +1,4 @@
+import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/presentation/bloc/covid_data_bloc.dart';
 import 'package:covid_app/presentation/global/theme/bloc/bloc.dart';
 import 'package:covid_app/presentation/pages/home/home_graphs_list.dart';
@@ -25,7 +26,6 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
     super.didChangeDependencies();
   }
 
-
   @override
   void initState() {
     _refreshController = RefreshController();
@@ -39,8 +39,8 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
     print(instance);
     return Scaffold(
       backgroundColor: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.grey[850]
-                  : Colors.white,
+          ? Colors.grey[850]
+          : Colors.white,
       body: BlocListener<CovidDataBloc, CovidDataState>(
         listener: (context, state) {
           if (state is CovidDataUpdated) {
@@ -54,7 +54,7 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
           builder: (context, state) {
             if (state is CovidDataLoaded) {
               final convertedData = Utils.getItalyFullMap(state.datas);
-              return _buildLoaded(convertedData);
+              return _buildLoaded(convertedData, state.datas);
             } else if (state is CovidDataLoadInProgress) {
               return _buildUpdating();
             } else {
@@ -66,7 +66,8 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
     );
   }
 
-  Widget _buildLoaded(Map<String, Map<DateTime, int>> convertedData) {
+  Widget _buildLoaded(
+      Map<String, Map<DateTime, int>> convertedData, List<CovidData> datas) {
     return SmartRefresher(
       controller: _refreshController,
       header: MaterialClassicHeader(
@@ -88,7 +89,7 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text('Oggi in Italia'),
-                  _buildData(context, convertedData),
+                  _buildData(context, convertedData, datas),
                   HomeGraphsList(
                     convertedData: convertedData,
                   )
@@ -101,8 +102,8 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
     );
   }
 
-  Widget _buildData(
-      BuildContext context, Map<String, Map<DateTime, int>> convertedData) {
+  Widget _buildData(BuildContext context,
+      Map<String, Map<DateTime, int>> convertedData, List<CovidData> datas) {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Container(
