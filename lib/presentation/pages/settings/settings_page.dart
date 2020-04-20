@@ -2,7 +2,6 @@ import 'package:covid_app/presentation/global/theme/app_themes.dart';
 import 'package:covid_app/presentation/global/theme/bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -88,7 +87,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           subtitle: Text("Sviluppo"),
                         ),
                         ListTile(
-                          title: Text("Riccardo Calligaro"),
+                          title: Text("Riccardo Calligaro, Leone Bacciu"),
                           subtitle: Text("Aiuto sviluppo"),
                         ),
                         Padding(

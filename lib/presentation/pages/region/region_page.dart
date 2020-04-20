@@ -30,6 +30,9 @@ class _RegionPageState extends State<RegionPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.region),
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+        ? Colors.blueAccent
+        : Colors.lightBlue,
       ),
       body: BlocBuilder<RegionBloc, RegionState>(
         builder: (context, state) {
@@ -42,7 +45,7 @@ class _RegionPageState extends State<RegionPage> {
           }
         },
       ),
-      backgroundColor: Colors.white,
+      //backgroundColor: Theme.of(context).primaryColor,
     );
   }
 

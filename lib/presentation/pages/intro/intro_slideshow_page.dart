@@ -43,8 +43,8 @@ class _IntroSlideShowPageState extends State<IntroSlideShowPage> {
                   color: Colors.blueAccent,
                   size: 150,
                 ),
-                backgroundColor: Colors.white,
-                textColor: Colors.blueAccent,
+                backgroundColor: Colors.grey[800],
+                textColor: Colors.white,
               ),
             ),
             Container(

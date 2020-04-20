@@ -25,6 +25,7 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
     super.didChangeDependencies();
   }
 
+
   @override
   void initState() {
     _refreshController = RefreshController();
@@ -37,6 +38,9 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
     var instance = BlocProvider.of<ThemeBloc>(context).state;
     print(instance);
     return Scaffold(
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey[850]
+                  : Colors.white,
       body: BlocListener<CovidDataBloc, CovidDataState>(
         listener: (context, state) {
           if (state is CovidDataUpdated) {
@@ -69,7 +73,7 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
         backgroundColor: Theme.of(context).brightness == Brightness.dark
             ? Colors.grey[900]
             : Colors.white,
-        color: Colors.lightBlue,
+        color: Theme.of(context).primaryColor,
       ),
       onRefresh: () => _refreshPage(context),
       child: SingleChildScrollView(

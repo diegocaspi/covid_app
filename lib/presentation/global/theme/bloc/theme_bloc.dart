@@ -29,8 +29,8 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
   @override
   ThemeState get initialState => ThemeState(
-        materialThemeData: materialThemeData[AppTheme.Dark],
-        cupertinoThemeData: cupertinoThemeData[AppTheme.Dark],
+        materialThemeData: materialThemeData[AppTheme.Light],
+        cupertinoThemeData: cupertinoThemeData[AppTheme.Light],
       );
 
   @override
