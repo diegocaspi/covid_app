@@ -10,13 +10,13 @@ final material = ThemeData(
   //canvasColor: Colors.white,
   appBarTheme: AppBarTheme(
     elevation: 1,
-    color: Colors.white,
+    color: Colors.blue,
     iconTheme: IconThemeData(color: Colors.white)
   ),
   primaryIconTheme: IconThemeData(color: Colors.grey[900], opacity: 0.50),
   primaryTextTheme: TextTheme(
     title: TextStyle(
-      color: Colors.grey[900],
+      color: Colors.white,
     ),
     headline: HeadingSmall.copyWith(color: Colors.grey[900]),
     body1: BodyStyle1.copyWith(color: Colors.grey[900]),
