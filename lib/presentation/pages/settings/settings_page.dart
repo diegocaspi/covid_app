@@ -19,10 +19,18 @@ class _SettingsPageState extends State<SettingsPage> {
       body: Column(
         children: <Widget>[
           _buildAboutUs(),
+          _buildDarkModeSwitch(),
           _buildContactUs(),
           _buildPackageInfo()
         ],
       ),
+    );
+  }
+
+  Widget _buildDarkModeSwitch(){
+    return ListTile(
+      title: Text("DarkMode"),
+      leading: Switch(value: false, onChanged: null),
     );
   }
 
