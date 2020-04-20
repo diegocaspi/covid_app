@@ -51,19 +51,14 @@ class MyApp extends StatelessWidget {
             create: (context) => ThemeBloc.instance,
           )
         ],
-        child: MaterialApp(
-          title: 'Covid-19 Trend',
-          theme: ThemeData(
-            backgroundColor: Color(0xffF4F5F9),
-            primaryColor: Color(0xff3377F9),
-            primarySwatch: Colors.blue,
-            brightness: Brightness.light,
-            fontFamily: 'San Francisco UI',
-            iconTheme: IconThemeData(
-              color: Color(0xff3377F9),
-            ),
-          ),
-          home: SplashPage(),
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state){
+            return MaterialApp(
+                title: 'Covid-19 Trend',
+                theme: state.materialThemeData,
+                home: SplashPage(),
+            );
+          }
         ),
       ),
     );
