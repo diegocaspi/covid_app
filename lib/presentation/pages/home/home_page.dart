@@ -1,4 +1,5 @@
 import 'package:covid_app/presentation/bloc/covid_data_bloc.dart';
+import 'package:covid_app/presentation/global/theme/bloc/bloc.dart';
 import 'package:covid_app/presentation/pages/home/home_graphs_list.dart';
 import 'package:covid_app/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,6 +34,8 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var instance = BlocProvider.of<ThemeBloc>(context).state;
+    print(instance);
     return Scaffold(
       body: BlocListener<CovidDataBloc, CovidDataState>(
         listener: (context, state) {

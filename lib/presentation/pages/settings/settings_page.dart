@@ -1,4 +1,8 @@
+import 'package:covid_app/presentation/global/theme/app_themes.dart';
+import 'package:covid_app/presentation/global/theme/bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -28,9 +32,18 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _buildDarkModeSwitch(){
-    return ListTile(
-      title: Text("DarkMode"),
-      leading: Switch(value: false, onChanged: null),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        return ListTile(
+          title: Text("DarkMode"),
+          leading: Switch(
+            value: state.materialThemeData.brightness == Brightness.dark,
+            onChanged: (value) => BlocProvider.of<ThemeBloc>(context).add(
+                ThemeChanged(theme: (value)?AppTheme.Dark:AppTheme.Light)
+            ),
+          ),
+        );
+      },
     );
   }
 

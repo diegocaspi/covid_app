@@ -4,6 +4,7 @@ import 'package:covid_app/data/repositories/covid_datas_repository_impl.dart';
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
 import 'package:covid_app/presentation/bloc/bloc.dart';
 import 'package:covid_app/presentation/blocs/region_bloc/region_bloc.dart';
+import 'package:covid_app/presentation/global/theme/bloc/bloc.dart';
 import 'package:covid_app/presentation/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<RegionBloc>(
             create: (context) => RegionBloc(covidDataRepository: di.sl()),
+          ),
+          BlocProvider<ThemeBloc>(
+            create: (context) => ThemeBloc.instance,
           )
         ],
         child: MaterialApp(
