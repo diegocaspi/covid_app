@@ -36,9 +36,7 @@ class _RegionPageState extends State<RegionPage> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Theme.of(context).brightness == Brightness.dark
-            ? Colors.blueAccent
-            : Colors.lightBlue,
+        backgroundColor: Theme.of(context).primaryColor
       ),
       body: BlocBuilder<RegionBloc, RegionState>(
         builder: (context, state) {

@@ -6,6 +6,7 @@ import 'package:covid_app/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../bloc/bloc.dart';
@@ -20,7 +21,7 @@ class BeforeHomePage extends StatefulWidget {
 
 class _BeforeHomePageState extends State<BeforeHomePage> {
   RefreshController _refreshController;
-
+  var formatter = new DateFormat.yMMMMd('it_IT');
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -87,7 +88,10 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Oggi in Italia'),
+                  Text('Oggi in Italia\nDati del giorno: ' +
+                  formatter.format(convertedData['positivi'].keys.elementAt(
+                    convertedData['positivi'].keys.length - 1)).toString()
+                  ),
                   _buildData(context, convertedData, datas),
                   GraphsList(
                     convertedData: convertedData,

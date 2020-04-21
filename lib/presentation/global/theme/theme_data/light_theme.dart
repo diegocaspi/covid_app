@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 final material = ThemeData(
   primarySwatch: Colors.blue,
   accentColor: Colors.blueAccent,
+  primaryColor: Colors.blue,
   brightness: Brightness.light,
   fontFamily: 'Montserrat',
   //canvasColor: Colors.white,
