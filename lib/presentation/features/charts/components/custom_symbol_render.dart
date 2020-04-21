@@ -23,17 +23,13 @@ class CustomCircleSymbolRenderer extends CircleSymbolRenderer {
         Color strokeColor,
         double strokeWidthPx}) {
     super.paint(canvas, bounds, dashPattern: dashPattern, fillColor: fillColor, strokeColor: strokeColor, strokeWidthPx: strokeWidthPx);
-    canvas.drawRect(
-        Rectangle(bounds.left - 5, bounds.top - 30, bounds.width + 10, bounds.height + 10),
-        fill: Color.transparent,
-    );
     var textStyle = style.TextStyle();
     textStyle.color = charts.ColorUtil.fromDartColor(Theme.of(parentContext).primaryTextTheme.caption.color);
     textStyle.fontSize = 15;
     canvas.drawText(
         ChartText.TextElement(value.value.toString(), style: textStyle),
         (bounds.left).round(),
-        (bounds.top - 28).round()
+        (bounds.top - 50).round()
     );
   }
 }
