@@ -33,14 +33,18 @@ class Utils {
   static Map<String, Map<DateTime, int>> getRegionMap(Map<DateTime, List<CovidData>> data) {
     Map<String, Map<DateTime, int>> ret = new Map();
 
-    Map<DateTime, List<CovidData>> dailyMap = (data);
+    ret['positivi'] = new Map();
+    ret['deceduti'] = new Map();
+    ret['dimessi'] = new Map();
+    ret['terapia_intensiva'] = new Map();
+    ret['nuovi_positivi'] = new Map();
 
     data.forEach((k, v) {
-      ret['positivi'] = {k: v[0].totPositivi};
-      ret['deceduti'] = {k: v[0].deceduti};
-      ret['dimessi'] = {k: v[0].dimessiGuariti};
-      ret['terapia_intensiva'] = {k: v[0].terapiaIntensiva};
-      ret['nuovi_positivi'] = {k: v[0].nuoviPositivi};
+      ret['positivi'].putIfAbsent(k, () => v[0].totPositivi);
+      ret['deceduti'].putIfAbsent(k, () => v[0].deceduti);
+      ret['dimessi'].putIfAbsent(k, () => v[0].dimessiGuariti);
+      ret['terapia_intensiva'].putIfAbsent(k, () => v[0].terapiaIntensiva);
+      ret['nuovi_positivi'].putIfAbsent(k, () => v[0].nuoviPositivi);
     });
 
     return ret;

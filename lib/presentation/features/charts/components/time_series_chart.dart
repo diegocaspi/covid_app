@@ -20,11 +20,13 @@ class _CustomTimeSeriesChartState extends State<CustomTimeSeriesChart> {
   ValueContainer tapValue = new ValueContainer('');
 
   _onSelectionChanged(charts.SelectionModel model) {
-    GraphData selectedDatum = model.selectedDatum.first.datum;
-    var date = DateFormat.MMMd('it').format(selectedDatum.datetime);
-    setState(() {
-      tapValue.value = '$date\n${selectedDatum.people.toInt().toString()}';
-    });
+    if(model.hasDatumSelection){
+      GraphData selectedDatum = model.selectedDatum.first.datum;
+      var date = DateFormat.MMMd('it').format(selectedDatum.datetime);
+      setState(() => tapValue.value = '$date\n${selectedDatum.people.toInt().toString()}');
+    }else{
+      setState(() => tapValue.value = '');
+    }
   }
 
   @override

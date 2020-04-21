@@ -1,6 +1,7 @@
 import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/presentation/blocs/region_bloc/region_bloc.dart';
-import 'package:covid_app/presentation/pages/region/region_graphs_list.dart';
+import 'package:covid_app/presentation/features/charts/graphs_list.dart';
+import 'package:covid_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,7 +43,7 @@ class _RegionPageState extends State<RegionPage> {
       body: BlocBuilder<RegionBloc, RegionState>(
         builder: (context, state) {
           if (state is RegionDataLoadSuccess) {
-            return _buildPage(state.data, state.dataList);
+            return _buildPage(Utils.getRegionMap(state.data), state.dataList);
           } else if (state is RegionDataLoadErorr) {
             return _buildError();
           } else {
@@ -54,7 +55,7 @@ class _RegionPageState extends State<RegionPage> {
     );
   }
 
-  Widget _buildPage(Map<DateTime, List<CovidData>> map, List<CovidData> data) {
+  Widget _buildPage(Map<String, Map<DateTime, int>> convertedData, List<CovidData> data) {
 
     return SingleChildScrollView(
       child: Padding(
@@ -65,7 +66,7 @@ class _RegionPageState extends State<RegionPage> {
             SizedBox(
               height: 16,
             ),
-            _graphicSection(map),
+            _graphicSection(convertedData),
           ],
         ),
       ),
@@ -119,8 +120,8 @@ class _RegionPageState extends State<RegionPage> {
     );
   }
 
-  Widget _graphicSection(Map<DateTime, List<CovidData>> convertedData) {
-    return RegionGraphsList(
+  Widget _graphicSection(Map<String, Map<DateTime, int>> convertedData) {
+    return GraphsList(
       convertedData: convertedData,
     );
   }

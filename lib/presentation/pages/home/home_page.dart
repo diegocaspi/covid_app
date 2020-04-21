@@ -1,7 +1,7 @@
 import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/presentation/bloc/covid_data_bloc.dart';
+import 'package:covid_app/presentation/features/charts/graphs_list.dart';
 import 'package:covid_app/presentation/global/theme/bloc/bloc.dart';
-import 'package:covid_app/presentation/pages/home/home_graphs_list.dart';
 import 'package:covid_app/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +89,7 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
                 children: <Widget>[
                   Text('Oggi in Italia'),
                   _buildData(context, convertedData, datas),
-                  HomeGraphsList(
+                  GraphsList(
                     convertedData: convertedData,
                   )
                 ],

@@ -48,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
         );
   }
 
-  void _darkModeOnSwitch(BuildContext context){
+  void _darkModeOnSwitch(BuildContext context) async {
     BlocProvider.of<ThemeBloc>(context).add(
         ThemeChanged(theme: (!switchValue) ? AppTheme.Dark : AppTheme.Light));
   }

@@ -1,10 +1,11 @@
 import 'package:covid_app/data/linear_data.dart';
-import 'package:covid_app/presentation/pages/home/components/time_series_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
+import 'components/time_series_chart.dart';
 
-class HomeGraphsList extends StatelessWidget {
+
+class GraphsList extends StatelessWidget {
   final Map<String, Map<DateTime, int>> convertedData;
 
   static List data_charts = [
@@ -12,13 +13,10 @@ class HomeGraphsList extends StatelessWidget {
     ["Totale deceduti", 'deceduti'],
     ["Totale dimessi", 'dimessi'],
     ["Totale nuovi casi", 'nuovi_positivi'],
-    ["Totale dimessi", 'dimessi'],
     ["Totale terapia intensiva", 'terapia_intensiva']
   ];
 
-
-
-  const HomeGraphsList({
+  const GraphsList({
     Key key,
     @required this.convertedData,
   }) : super(key: key);
@@ -26,11 +24,11 @@ class HomeGraphsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         for(var d in data_charts) _buildChart(
-          title: d[0],
-          data: _createData(convertedData, d[1], context),
-          context: context
+            title: d[0],
+            data: _createData(convertedData, d[1], context),
+            context: context
         )
       ],
     );
@@ -51,17 +49,16 @@ class HomeGraphsList extends StatelessWidget {
           height: 16,
         ),
         Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Container(
-            height: 240,
-            width: MediaQuery.of(context).size.width,
-            child: CustomTimeSeriesChart(data),
-          ),
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              height: 240,
+              width: MediaQuery.of(context).size.width,
+              child: CustomTimeSeriesChart(data),
+            )
         ),
       ],
     );
   }
-
 
 
   List<charts.Series<GraphData, DateTime>> _createData(Map<String, Map<DateTime, int>> convertedData, String label, BuildContext context){
