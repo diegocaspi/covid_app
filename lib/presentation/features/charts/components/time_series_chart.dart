@@ -17,7 +17,7 @@ class CustomTimeSeriesChart extends StatefulWidget {
 }
 
 class _CustomTimeSeriesChartState extends State<CustomTimeSeriesChart> {
-  ValueContainer tapValue = new ValueContainer('');
+  ValueContainer tapValue = ValueContainer('');
 
   _onSelectionChanged(charts.SelectionModel model) {
     if(model.hasDatumSelection){
@@ -49,15 +49,16 @@ class _CustomTimeSeriesChartState extends State<CustomTimeSeriesChart> {
           )
       ),
       behaviors: [
-        new charts.SelectNearest(eventTrigger: charts.SelectionTrigger.tapAndDrag),
-        new LinePointHighlighter(
+        charts.SelectNearest(eventTrigger: charts.SelectionTrigger.pressHold),
+        charts.SelectNearest(eventTrigger: charts.SelectionTrigger.tapAndDrag),
+        LinePointHighlighter(
             showHorizontalFollowLine: charts.LinePointHighlighterFollowLineType.nearest,
             showVerticalFollowLine: charts.LinePointHighlighterFollowLineType.nearest,
             symbolRenderer: CustomCircleSymbolRenderer(tapValue, context)
         ),
       ],
       selectionModels: [
-        new charts.SelectionModelConfig(
+        charts.SelectionModelConfig(
           type: charts.SelectionModelType.info,
           changedListener: _onSelectionChanged,
         )
