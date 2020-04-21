@@ -18,6 +18,7 @@ final material = ThemeData(
     title: TextStyle(color: Colors.white),
     headline: HeadingSmall.copyWith(color: Colors.white),
     body1: BodyStyle1.copyWith(color: Colors.white),
+    caption: TextStyle(color: Colors.white),
   ),
   cardTheme: CardTheme(color: Colors.grey[900]),
 );

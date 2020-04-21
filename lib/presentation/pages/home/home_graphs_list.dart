@@ -1,9 +1,23 @@
-import 'package:fl_animated_linechart/chart/animated_line_chart.dart';
-import 'package:fl_animated_linechart/chart/line_chart.dart';
+import 'package:covid_app/data/linear_data.dart';
+import 'package:covid_app/presentation/pages/home/components/time_series_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+
 
 class HomeGraphsList extends StatelessWidget {
   final Map<String, Map<DateTime, int>> convertedData;
+
+  static List data_charts = [
+    ["Totale attualmente contagiati", 'positivi'],
+    ["Totale deceduti", 'deceduti'],
+    ["Totale dimessi", 'dimessi'],
+    ["Totale nuovi casi", 'nuovi_positivi'],
+    ["Totale dimessi", 'dimessi'],
+    ["Totale terapia intensiva", 'terapia_intensiva']
+  ];
+
+
+
   const HomeGraphsList({
     Key key,
     @required this.convertedData,
@@ -12,30 +26,11 @@ class HomeGraphsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
-        _buildChart(
-          title: "Totale attualmente contagiati",
-          graph: _buildGraphicTotaleContagiati(convertedData, context),
-        ),
-        _buildChart(
-          title: "Totale deceduti",
-          graph: _buildGraphicTotaleDeceduti(convertedData, context),
-        ),
-        _buildChart(
-          title: "Totale dimessi",
-          graph: _buildGraphicTotaleDimessi(convertedData, context),
-        ),
-        _buildChart(
-          title: "Totale nuovi casi",
-          graph: _buildGraphicTotaleNuoviContagiati(convertedData, context),
-        ),
-        _buildChart(
-          title: "Totale dimessi",
-          graph: _buildGraphicTotaleDimessi(convertedData, context),
-        ),
-        _buildChart(
-          title: "Totale terapia intensiva",
-          graph: _buildGraphicTotaleTerapiaIntensiva(convertedData, context),
+      children: [
+        for(var d in data_charts) _buildChart(
+          title: d[0],
+          data: _createData(convertedData, d[1], context),
+          context: context
         )
       ],
     );
@@ -43,7 +38,8 @@ class HomeGraphsList extends StatelessWidget {
 
   Widget _buildChart({
     @required String title,
-    @required Widget graph,
+    @required List<charts.Series> data,
+    @required BuildContext context
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,120 +52,32 @@ class HomeGraphsList extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: graph,
+          child: Container(
+            height: 240,
+            width: MediaQuery.of(context).size.width,
+            child: CustomTimeSeriesChart(data),
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildGraphicTotaleContagiati(
-      Map<String, Map<DateTime, int>> convertedData, BuildContext context) {
 
-    Map<DateTime, double> line1 = {};
-    convertedData['positivi'].forEach((k, v) {
-      line1.putIfAbsent(k, () => v.toDouble());
+
+  List<charts.Series<GraphData, DateTime>> _createData(Map<String, Map<DateTime, int>> convertedData, String label, BuildContext context){
+    List<GraphData> data = [];
+    convertedData[label].forEach((k, v) {
+      data.add(new GraphData(k, v.toDouble()));
     });
 
-    LineChart chart;
-    chart = LineChart.fromDateTimeMaps(
-        [line1], [Colors.blue], ['Totale attualmente contagiati'],
-        tapTextFontWeight: FontWeight.w400);
-
-    return Container(
-      height: 240,
-      width: MediaQuery.of(context).size.width,
-      child: AnimatedLineChart(
-        chart,
-        key: UniqueKey(),
-      ),
-    );
-  }
-
-  Widget _buildGraphicTotaleDeceduti(
-      Map<String, Map<DateTime, int>> convertedData, BuildContext context) {
-    Map<DateTime, double> line1 = {};
-    convertedData['deceduti'].forEach((k, v) {
-      line1.putIfAbsent(k, () => v.toDouble());
-    });
-
-    LineChart chart;
-    chart = LineChart.fromDateTimeMaps(
-        [line1], [Colors.blue], ['Totale Deceduti'],
-        tapTextFontWeight: FontWeight.w400);
-
-    return Container(
-      height: 240,
-      width: MediaQuery.of(context).size.width,
-      child: AnimatedLineChart(
-        chart,
-        key: UniqueKey(),
-      ),
-    );
-  }
-
-  Widget _buildGraphicTotaleDimessi(
-      Map<String, Map<DateTime, int>> convertedData, BuildContext context) {
-    Map<DateTime, double> line1 = {};
-    convertedData['dimessi'].forEach((k, v) {
-      line1.putIfAbsent(k, () => v.toDouble());
-    });
-
-    LineChart chart;
-    chart = LineChart.fromDateTimeMaps(
-        [line1], [Colors.blue], ['Totale Dimessi'],
-        tapTextFontWeight: FontWeight.w400);
-
-    return Container(
-      height: 240,
-      width: MediaQuery.of(context).size.width,
-      child: AnimatedLineChart(
-        chart,
-        key: UniqueKey(),
-      ),
-    );
-  }
-
-  Widget _buildGraphicTotaleNuoviContagiati(
-      Map<String, Map<DateTime, int>> convertedData, BuildContext context) {
-    Map<DateTime, double> line1 = {};
-    convertedData['nuovi_positivi'].forEach((k, v) {
-      line1.putIfAbsent(k, () => v.toDouble());
-    });
-
-    LineChart chart;
-    chart = LineChart.fromDateTimeMaps(
-        [line1], [Colors.blue], ['Totale Nuovi Casi'],
-        tapTextFontWeight: FontWeight.w400);
-
-    return Container(
-      height: 240,
-      width: MediaQuery.of(context).size.width,
-      child: AnimatedLineChart(
-        chart,
-        key: UniqueKey(),
-      ),
-    );
-  }
-
-  Widget _buildGraphicTotaleTerapiaIntensiva(
-      Map<String, Map<DateTime, int>> convertedData, BuildContext context) {
-    Map<DateTime, double> line1 = {};
-    convertedData['terapia_intensiva'].forEach((k, v) {
-      line1.putIfAbsent(k, () => v.toDouble());
-    });
-
-    LineChart chart;
-    chart = LineChart.fromDateTimeMaps(
-        [line1], [Colors.blue], ['Totale Terapia Intensiva'],
-        tapTextFontWeight: FontWeight.w400);
-
-    return Container(
-      height: 240,
-      width: MediaQuery.of(context).size.width,
-      child: AnimatedLineChart(
-        chart,
-        key: UniqueKey(),
-      ),
-    );
+    return [
+      new charts.Series<GraphData, DateTime>(
+        id: label,
+        colorFn: (_, __) => charts.ColorUtil.fromDartColor(Theme.of(context).accentColor),
+        domainFn: (GraphData sales, _) => sales.datetime,
+        measureFn: (GraphData sales, _) => sales.people,
+        data: data,
+      )
+    ];
   }
 }

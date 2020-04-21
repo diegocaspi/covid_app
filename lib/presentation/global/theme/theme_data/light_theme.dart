@@ -20,6 +20,7 @@ final material = ThemeData(
     ),
     headline: HeadingSmall.copyWith(color: Colors.grey[900]),
     body1: BodyStyle1.copyWith(color: Colors.grey[900]),
+    caption: TextStyle(color: Colors.grey[900]),
   ),
 );
 

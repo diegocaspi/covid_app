@@ -55,6 +55,7 @@ class _RegionPageState extends State<RegionPage> {
   }
 
   Widget _buildPage(Map<DateTime, List<CovidData>> map, List<CovidData> data) {
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),

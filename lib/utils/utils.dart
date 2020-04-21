@@ -30,6 +30,22 @@ class Utils {
     return ret;
   }
 
+  static Map<String, Map<DateTime, int>> getRegionMap(Map<DateTime, List<CovidData>> data) {
+    Map<String, Map<DateTime, int>> ret = new Map();
+
+    Map<DateTime, List<CovidData>> dailyMap = (data);
+
+    data.forEach((k, v) {
+      ret['positivi'] = {k: v[0].totPositivi};
+      ret['deceduti'] = {k: v[0].deceduti};
+      ret['dimessi'] = {k: v[0].dimessiGuariti};
+      ret['terapia_intensiva'] = {k: v[0].terapiaIntensiva};
+      ret['nuovi_positivi'] = {k: v[0].nuoviPositivi};
+    });
+
+    return ret;
+  }
+
   static List<CovidData> convertDataToDb(List<CovidDataElement> data) {
     List<CovidData> ret = [];
     data.forEach((f) => ret.add(CovidDataMapper.convertToDb(f)));

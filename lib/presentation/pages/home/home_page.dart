@@ -36,7 +36,6 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
   @override
   Widget build(BuildContext context) {
     var instance = BlocProvider.of<ThemeBloc>(context).state;
-    print(instance);
     return Scaffold(
       backgroundColor: Theme.of(context).brightness == Brightness.dark
           ? Colors.grey[850]
