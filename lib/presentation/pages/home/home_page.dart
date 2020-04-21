@@ -112,6 +112,7 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
         child: Container(
           width: MediaQuery.of(context).size.width,
           child: Card(
+            elevation: (Theme.of(context).brightness == Brightness.light)?10:5,
             margin: EdgeInsets.zero,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
