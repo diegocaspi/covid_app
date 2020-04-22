@@ -12,15 +12,9 @@ class CovidDataLoadInProgress extends CovidDataState {}
 
 class CovidDataLoaded extends CovidDataState {
   final Map<String, Map<DateTime, int>> convertedData;
-  final List<CovidData> data;
-  final String region;
-  final bool italy;
 
   CovidDataLoaded({
-    @required this.data,
     @required this.convertedData,
-    @required this.region,
-    @required this.italy,
   });
 }
 

@@ -1,6 +1,6 @@
 name: covid_app
 description: App used to see the trend of CoronaVirus
-version: 1.0.0+1
+version: 1.0.2+1
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -17,7 +17,7 @@ dependencies:
   equatable: ^1.1.1
   connectivity: ^0.4.8+2
   http: ^0.12.0+4
-  shared_preferences: ^0.5.6+3
+  shared_preferences: ^0.5.7
   # Database
   moor_flutter: ^2.1.1
   provider: ^4.0.5

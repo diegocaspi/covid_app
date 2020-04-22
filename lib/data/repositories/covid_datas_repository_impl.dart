@@ -61,7 +61,6 @@ class CovidDataRepositoryImpl implements CovidDataRepository{
       list.forEach((f) => insertElements.add(CovidDataMapper.convertToDb(f)));
       covidDataDao.deleteAllCovidData();
       covidDataDao.updateAllCovidData(insertElements);
-      //insertElements.forEach((f) => covidDataDao.insertEvent(f));
     }
   }
 

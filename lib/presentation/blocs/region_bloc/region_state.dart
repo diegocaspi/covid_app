@@ -9,9 +9,8 @@ class RegionDataLoadInProgress extends RegionState {}
 
 class RegionDataLoadSuccess extends RegionState {
   final Map<String, Map<DateTime, int>> data;
-  final List<CovidData> dataList;
 
-  RegionDataLoadSuccess({@required this.data, @required this.dataList});
+  RegionDataLoadSuccess({@required this.data});
 }
 
 class RegionDataLoadErorr extends RegionState {}

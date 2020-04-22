@@ -1,3 +1,4 @@
+import 'package:covid_app/data/label_list.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import '../../../data/linear_data.dart';
@@ -15,21 +16,13 @@ class GraphsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    List dataCharts = [
-      ["Totale attualmente contagiati", 'positivi'],
-      ["Totale deceduti", 'deceduti'],
-      ["Totale dimessi", 'dimessi'],
-      ["Totale nuovi casi", 'nuovi_positivi'],
-      ["Totale terapia intensiva", 'terapia_intensiva']
-    ];
-
     return ListView.builder(
         shrinkWrap: true,
         cacheExtent: 300.0,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: dataCharts.length,
+        itemCount: LabelLists.graph_label.length,
         itemBuilder: (context, i) => _buildChart(
-            values: dataCharts[i],
+            values: LabelLists.graph_label[i],
             context: context
         )
     );

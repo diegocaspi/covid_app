@@ -1,7 +1,6 @@
-import 'package:covid_app/data/local/moor_database.dart';
+import 'package:covid_app/data/label_list.dart';
 import 'package:covid_app/presentation/bloc/covid_data_bloc.dart';
 import 'package:covid_app/presentation/features/charts/graphs_list.dart';
-import 'package:covid_app/presentation/global/theme/bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +34,6 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var instance = BlocProvider.of<ThemeBloc>(context).state;
     return Scaffold(
       backgroundColor: Theme.of(context).brightness == Brightness.dark
           ? Colors.grey[850]
@@ -52,8 +50,7 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
         child: BlocBuilder<CovidDataBloc, CovidDataState>(
           builder: (context, state) {
             if (state is CovidDataLoaded) {
-              final convertedData = state.convertedData;
-              return _buildLoaded(convertedData, state.data);
+              return _buildLoaded(state.convertedData);
             } else if (state is CovidDataLoadInProgress) {
               return _buildUpdating();
             } else {
@@ -66,7 +63,7 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
   }
 
   Widget _buildLoaded(
-      Map<String, Map<DateTime, int>> convertedData, List<CovidData> datas) {
+      Map<String, Map<DateTime, int>> convertedData) {
     return SmartRefresher(
       controller: _refreshController,
       header: MaterialClassicHeader(
@@ -88,7 +85,7 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text('Oggi in Italia\nDati del giorno: ${formatter.format(convertedData['positivi'].keys.last)}'),
-                  _buildData(context, convertedData, datas),
+                  _buildData(context, convertedData),
                   GraphsList(convertedData: convertedData,)
                 ],
               ),
@@ -100,7 +97,8 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
   }
 
   Widget _buildData(BuildContext context,
-      Map<String, Map<DateTime, int>> convertedData, List<CovidData> datas) {
+      Map<String, Map<DateTime, int>> convertedData) {
+
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Container(
@@ -113,66 +111,20 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "Totale deceduti: " +
-                        convertedData['deceduti']
-                            .values
-                            .elementAt(
-                                convertedData['deceduti'].values.length - 1)
-                            .toString(),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    "Totale attualmente positivi: " +
-                        convertedData['positivi']
-                            .values
-                            .elementAt(
-                                convertedData['positivi'].values.length - 1)
-                            .toString(),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    "Totale guariti: " +
-                        convertedData['dimessi']
-                            .values
-                            .elementAt(
-                                convertedData['dimessi'].values.length - 1)
-                            .toString(),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    "Totale terapia intensiva: " +
-                        convertedData['terapia_intensiva']
-                            .values
-                            .elementAt(convertedData['terapia_intensiva']
-                                    .values
-                                    .length -
-                                1)
-                            .toString(),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    "Totale nuovi casi di oggi: " +
-                        convertedData['nuovi_positivi']
-                            .values
-                            .elementAt(
-                                convertedData['nuovi_positivi'].values.length -
-                                    1)
-                            .toString(),
+                  for (List<String> l in LabelLists.card_labels) Column(
+                    children: <Widget>[
+                      Text(
+                        "Totale ${l[0]}: ${convertedData[l[1]].values.last.toString()}",
+                      ),
+                      const SizedBox(height: 16),
+                    ],
                   ),
                 ],
               ),
             ),
           ),
-        ));
+        )
+    );
   }
 
   void _refreshPage(BuildContext context) async {

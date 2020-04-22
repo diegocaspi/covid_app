@@ -20,7 +20,7 @@ class TopBar extends StatelessWidget {
           // ),
           child: Column(
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 36,
               ),
               Row(
@@ -31,9 +31,7 @@ class TopBar extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         _getMessageFromHour(hour),
-                        style: TextStyle(
-                          fontSize: 23,
-                        ),
+                        style: TextStyle(fontSize: 23),
                       ),
                       Text(
                         _todayDate(DateTime.now()),
@@ -64,10 +62,10 @@ class TopBar extends StatelessWidget {
           child: Container(
             height: 50.0,
             child: RaisedButton(
-              onPressed: () {
-                showDialog(
-                    context: context, builder: (context) => RegionsDialog());
-              },
+              elevation: 10,
+              onPressed: () => showDialog(
+                    context: context, builder: (context) => RegionsDialog()
+              ),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(80.0)),
               padding: EdgeInsets.all(0.0),
@@ -95,10 +93,6 @@ class TopBar extends StatelessWidget {
             ),
           ),
         ),
-        // RaisedButton(
-        //   child: Text('Visualizza per regione'),
-        //   onPressed: () {},
-        // )
       ],
     );
   }
@@ -110,7 +104,6 @@ class TopBar extends StatelessWidget {
   }
 
   String _todayDate(DateTime date) {
-    var formatter = new DateFormat.yMMMMd('it_IT');
-    return formatter.format(date);
+    return DateFormat.yMMMMd('it_IT').format(date);
   }
 }

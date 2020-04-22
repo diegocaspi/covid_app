@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
 import 'package:covid_app/utils/utils.dart';
 import 'package:equatable/equatable.dart';
@@ -36,7 +35,8 @@ class CovidDataBloc extends Bloc<CovidDataEvent, CovidDataState> {
     try {
       final repoData = await covidDataRepository.getAllCovidData();
       Map<String, Map<DateTime, int>> convertedData = Utils.getItalyFullMap(repoData);
-      yield CovidDataLoaded(data: repoData, convertedData: convertedData, italy: true, region: "italy");
+//      yield CovidDataLoaded(data: repoData, convertedData: convertedData, italy: true, region: "italy");
+      yield CovidDataLoaded(convertedData: convertedData);
     } catch (_) {
       yield CovidDataLoadError();
     }

@@ -1,4 +1,4 @@
-import 'package:covid_app/data/local/moor_database.dart';
+import 'package:covid_app/data/label_list.dart';
 import 'package:covid_app/presentation/blocs/region_bloc/region_bloc.dart';
 import 'package:covid_app/presentation/features/charts/graphs_list.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class _RegionPageState extends State<RegionPage> {
       body: BlocBuilder<RegionBloc, RegionState>(
         builder: (context, state) {
           if (state is RegionDataLoadSuccess) {
-            return _buildPage(state.data, state.dataList);
+            return _buildPage(state.data);
           } else if (state is RegionDataLoadErorr) {
             return _buildError();
           } else {
@@ -52,17 +52,15 @@ class _RegionPageState extends State<RegionPage> {
     );
   }
 
-  Widget _buildPage(Map<String, Map<DateTime, int>> convertedData, List<CovidData> data) {
+  Widget _buildPage(Map<String, Map<DateTime, int>> convertedData) {
 
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            _middleSection(data),
-            SizedBox(
-              height: 16,
-            ),
+            _middleSection(convertedData),
+            const SizedBox(height: 16),
             _graphicSection(convertedData),
           ],
         ),
@@ -70,7 +68,8 @@ class _RegionPageState extends State<RegionPage> {
     );
   }
 
-  Widget _middleSection(List<CovidData> datas) {
+  Widget _middleSection(Map<String, Map<DateTime, int>> convertedData) {
+
     return Card(
       margin: EdgeInsets.zero,
       child: Container(
@@ -79,37 +78,13 @@ class _RegionPageState extends State<RegionPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              "Totale deceduti: " +
-                  datas.elementAt(datas.length - 1).deceduti.toString(),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              "Totale attualmente positivi: " +
-                  datas.elementAt(datas.length - 1).totPositivi.toString(),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              "Totale dimessi: " +
-                  datas.elementAt(datas.length - 1).dimessiGuariti.toString(),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              "Totale terapia intensiva: " +
-                  datas.elementAt(datas.length - 1).terapiaIntensiva.toString(),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              "Totale nuovi casi di oggi: " +
-                  datas.elementAt(datas.length - 1).nuoviPositivi.toString(),
+            for (List<String> l in LabelLists.card_labels) Column(
+              children: <Widget>[
+                Text(
+                  "Totale ${l[0]}: ${convertedData[l[1]].values.last.toString()}",
+                ),
+                const SizedBox(height: 16),
+              ],
             ),
           ],
         ),
