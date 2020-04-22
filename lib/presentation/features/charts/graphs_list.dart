@@ -9,7 +9,7 @@ class GraphsList extends StatelessWidget {
 
   const GraphsList({
     Key key,
-    @required this.convertedData,
+    @required this.convertedData
   }) : super(key: key);
 
   @override
@@ -23,27 +23,29 @@ class GraphsList extends StatelessWidget {
       ["Totale terapia intensiva", 'terapia_intensiva']
     ];
 
-    return Column(
-      children: <Widget>[
-        for(var d in dataCharts) _buildChart(
-            title: d[0],
-            data: _createData(convertedData, d[1], context),
+    return ListView.builder(
+        shrinkWrap: true,
+        cacheExtent: 300.0,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: dataCharts.length,
+        itemBuilder: (context, i) => _buildChart(
+            values: dataCharts[i],
             context: context
         )
-      ],
     );
   }
 
   Widget _buildChart({
-    @required String title,
-    @required List<charts.Series> data,
+    @required List<dynamic> values,
     @required BuildContext context
   }) {
+    List<charts.Series> data = _createData(convertedData, values[1], context);
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          title,
+          values[0],
         ),
         SizedBox(
           height: 16,

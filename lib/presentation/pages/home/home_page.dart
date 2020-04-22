@@ -87,14 +87,9 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Oggi in Italia\nDati del giorno: ' +
-                  formatter.format(convertedData['positivi'].keys.elementAt(
-                    convertedData['positivi'].keys.length - 1)).toString()
-                  ),
+                  Text('Oggi in Italia\nDati del giorno: ${formatter.format(convertedData['positivi'].keys.last)}'),
                   _buildData(context, convertedData, datas),
-                  GraphsList(
-                    convertedData: convertedData,
-                  )
+                  GraphsList(convertedData: convertedData,)
                 ],
               ),
             )
