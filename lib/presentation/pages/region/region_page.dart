@@ -1,7 +1,6 @@
 import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/presentation/blocs/region_bloc/region_bloc.dart';
 import 'package:covid_app/presentation/features/charts/graphs_list.dart';
-import 'package:covid_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,7 +40,7 @@ class _RegionPageState extends State<RegionPage> {
       body: BlocBuilder<RegionBloc, RegionState>(
         builder: (context, state) {
           if (state is RegionDataLoadSuccess) {
-            return _buildPage(Utils.getRegionMap(state.data), state.dataList);
+            return _buildPage(state.data, state.dataList);
           } else if (state is RegionDataLoadErorr) {
             return _buildError();
           } else {

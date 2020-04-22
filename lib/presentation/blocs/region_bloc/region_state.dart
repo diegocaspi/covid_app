@@ -8,7 +8,7 @@ class RegionDataInitial extends RegionState {}
 class RegionDataLoadInProgress extends RegionState {}
 
 class RegionDataLoadSuccess extends RegionState {
-  final Map<DateTime, List<CovidData>> data;
+  final Map<String, Map<DateTime, int>> data;
   final List<CovidData> dataList;
 
   RegionDataLoadSuccess({@required this.data, @required this.dataList});

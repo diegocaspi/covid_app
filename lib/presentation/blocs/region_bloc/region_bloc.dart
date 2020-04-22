@@ -26,7 +26,7 @@ class RegionBloc extends Bloc<RegionBlocEvent, RegionState> {
       yield RegionDataLoadInProgress();
       try {
         final data = await covidDataRepository.getDataFromRegion(event.region);
-        Map<DateTime, List<CovidData>> map = Utils.getDailyMap(data);
+        Map<String, Map<DateTime, int>> map = Utils.getRegionMap(data);
         yield RegionDataLoadSuccess(data: map, dataList: data);
       } catch (_) {
         yield RegionDataLoadErorr();

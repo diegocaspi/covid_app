@@ -2,7 +2,6 @@ import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/presentation/bloc/covid_data_bloc.dart';
 import 'package:covid_app/presentation/features/charts/graphs_list.dart';
 import 'package:covid_app/presentation/global/theme/bloc/bloc.dart';
-import 'package:covid_app/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,8 +52,8 @@ class _BeforeHomePageState extends State<BeforeHomePage> {
         child: BlocBuilder<CovidDataBloc, CovidDataState>(
           builder: (context, state) {
             if (state is CovidDataLoaded) {
-              final convertedData = Utils.getItalyFullMap(state.datas);
-              return _buildLoaded(convertedData, state.datas);
+              final convertedData = state.convertedData;
+              return _buildLoaded(convertedData, state.data);
             } else if (state is CovidDataLoadInProgress) {
               return _buildUpdating();
             } else {

@@ -1,8 +1,7 @@
 import 'package:covid_app/core/regions.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../utils/utils.dart';
 import '../../region/region_page.dart';
+import 'noglow_behavior.dart';
 
 class RegionsDialog extends StatelessWidget {
   const RegionsDialog({Key key}) : super(key: key);

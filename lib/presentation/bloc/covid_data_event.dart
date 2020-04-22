@@ -8,13 +8,4 @@ abstract class CovidDataEvent extends Equatable{
 
 class GetAllCovidData extends CovidDataEvent {}
 
-class GetCovidDataFromRegion extends CovidDataEvent {
-  final String region;
-  //List<CovidData> datas;
-
-  GetCovidDataFromRegion({
-    @required this.region
-  });
-}
-
 class UpdateCovidData extends CovidDataEvent {}

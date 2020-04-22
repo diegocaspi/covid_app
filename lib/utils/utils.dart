@@ -30,12 +30,15 @@ class Utils {
     return ret;
   }
 
-  static Map<String, Map<DateTime, int>> getRegionMap(Map<DateTime, List<CovidData>> data) {
+  static Map<String, Map<DateTime, int>> getRegionMap(List<CovidData> data) {
+
+    Map<DateTime, List<CovidData>> dailyMap = getDailyMap(data);
+
     Map<String, Map<DateTime, int>> ret = Map();
 
     for(String l in ['positivi', 'deceduti', 'dimessi', 'terapia_intensiva', 'nuovi_positivi']) ret[l] = Map();
 
-    data.forEach((k, v) {
+    dailyMap.forEach((k, v) {
       ret['positivi'].putIfAbsent(k, () => v[0].totPositivi);
       ret['deceduti'].putIfAbsent(k, () => v[0].deceduti);
       ret['dimessi'].putIfAbsent(k, () => v[0].dimessiGuariti);
@@ -109,13 +112,5 @@ class Utils {
       ret[k] = tot;
     });
     return ret;
-  }
-}
-
-class NoGlowBehavior extends ScrollBehavior {
-  @override
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
-    return child;
   }
 }
