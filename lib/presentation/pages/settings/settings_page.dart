@@ -1,8 +1,10 @@
 import 'package:covid_app/presentation/global/theme/app_themes.dart';
 import 'package:covid_app/presentation/global/theme/bloc/bloc.dart';
+import 'package:covid_app/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info/package_info.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'about_app_dialog.dart';
@@ -23,6 +25,12 @@ class _SettingsPageState extends State<SettingsPage> {
         return Scaffold(
           appBar: AppBar(
             title: Text('Impostazioni'),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.of(context).pushReplacement(
+                  PageTransition(child: BeforeHomePage(), type: PageTransitionType.leftToRight)
+              ),
+            ),
           ),
           body: Column(
             children: <Widget>[

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../data/local/moor_database.dart';
 import '../../../domain/repositories/covid_datas_repository.dart';
 import '../../../utils/utils.dart';
 

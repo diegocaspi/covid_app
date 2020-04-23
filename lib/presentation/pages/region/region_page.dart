@@ -1,8 +1,10 @@
 import 'package:covid_app/data/label_list.dart';
 import 'package:covid_app/presentation/blocs/region_bloc/region_bloc.dart';
 import 'package:covid_app/presentation/features/charts/graphs_list.dart';
+import 'package:covid_app/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:page_transition/page_transition.dart';
 
 class RegionPage extends StatefulWidget {
   //the region that we have to see data
@@ -35,7 +37,13 @@ class _RegionPageState extends State<RegionPage> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Theme.of(context).primaryColor
+        backgroundColor: Theme.of(context).primaryColor,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pushReplacement(
+              PageTransition(child: BeforeHomePage(), type: PageTransitionType.leftToRight)
+          ),
+        ),
       ),
       body: BlocBuilder<RegionBloc, RegionState>(
         builder: (context, state) {

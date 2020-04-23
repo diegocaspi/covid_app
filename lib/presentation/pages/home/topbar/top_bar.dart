@@ -2,6 +2,7 @@ import 'package:covid_app/presentation/pages/home/dialog/select_region_dialog.da
 import 'package:covid_app/presentation/pages/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({Key key}) : super(key: key);
@@ -45,9 +46,9 @@ class TopBar extends StatelessWidget {
                           Icons.settings,
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SettingsPage(),
-                          ));
+                          Navigator.of(context).push(
+                            PageTransition(child: SettingsPage(), type: PageTransitionType.rightToLeft)
+                          );
                         },
                       )
                     ],
