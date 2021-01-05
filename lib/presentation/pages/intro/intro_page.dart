@@ -1,5 +1,5 @@
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
-import 'package:covid_app/presentation/bloc/bloc.dart';
+import 'package:covid_app/presentation/blocs/home_bloc/bloc.dart';
 import 'package:covid_app/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

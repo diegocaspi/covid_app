@@ -1,5 +1,5 @@
 import 'package:covid_app/data/local/moor_database.dart';
-import 'package:covid_app/presentation/bloc/covid_data_bloc.dart';
+import 'package:covid_app/presentation/blocs/home_bloc/covid_data_bloc.dart';
 import 'package:covid_app/presentation/features/charts/graphs_list.dart';
 import 'package:covid_app/presentation/global/theme/bloc/bloc.dart';
 import 'package:covid_app/utils/utils.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../bloc/bloc.dart';
+import '../../blocs/home_bloc/bloc.dart';
 import 'topbar/top_bar.dart';
 
 class BeforeHomePage extends StatefulWidget {

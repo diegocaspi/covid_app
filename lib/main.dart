@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:covid_app/core/simple_bloc_delegate.dart';
 import 'package:covid_app/data/repositories/covid_datas_repository_impl.dart';
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
-import 'package:covid_app/presentation/bloc/bloc.dart';
+import 'package:covid_app/presentation/blocs/home_bloc/bloc.dart';
 import 'package:covid_app/presentation/blocs/region_bloc/region_bloc.dart';
 import 'package:covid_app/presentation/global/theme/bloc/bloc.dart';
 import 'package:covid_app/presentation/pages/splash/splash_page.dart';

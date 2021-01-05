@@ -3,7 +3,7 @@ import 'package:covid_app/data/local/daos/covid_data_dao.dart';
 import 'package:covid_app/data/local/moor_database.dart';
 import 'package:covid_app/data/repositories/covid_datas_repository_impl.dart';
 import 'package:covid_app/domain/repositories/covid_datas_repository.dart';
-import 'package:covid_app/presentation/bloc/bloc.dart';
+import 'package:covid_app/presentation/blocs/home_bloc/bloc.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
